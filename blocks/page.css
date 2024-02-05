@@ -16,7 +16,7 @@
   margin: 0 auto;
 }
 
-@media screen (max-width: 480px) {
+@media screen and (max-width: 480px) {
   .page__section {
     max-width: 480px;
   }
