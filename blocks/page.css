@@ -16,13 +16,14 @@
   margin: 0 auto;
 }
 
-/* @media screen and (max-width: 480px) {
-  .page__content {
-    width: 100%;
+@media screen (max-width: 480px) {
+  .page__section {
+    max-width: 480px;
   }
-} */
+}
 
 @media screen and (max-width: 800px) {
-  .page__content {
+  .page__section {
+    max-width: 581px;
   }
 }

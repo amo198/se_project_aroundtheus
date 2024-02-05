@@ -12,8 +12,6 @@
 
 @media screen and (max-width: 480px) {
   .header {
-    margin-top: 28px;
-    height: 56px;
     width: 100%;
   }
 
@@ -26,13 +24,12 @@
 
 @media screen and (max-width: 800px) {
   .header {
-    width: 100%;
+    margin: auto;
   }
 
   .header__image {
-    max-width: 150px;
-    padding: 0;
-    margin-left: 25px;
-    margin-bottom: 45px;
+    height: 33px;
+    margin-left: 19px;
+    margin-top: 45px;
   }
 }
