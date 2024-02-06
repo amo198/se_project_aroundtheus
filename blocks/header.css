@@ -1,6 +1,7 @@
 .header {
   margin-top: 45px;
   border-bottom-color: #545454;
+  opacity: 84;
   border-bottom-style: solid;
   border-radius: 1px;
 }
@@ -10,6 +11,16 @@
   padding-bottom: 41px;
 }
 
+@media screen and (max-width: 800px) {
+  .header {
+    margin: auto;
+  }
+
+  .header__image {
+    margin-top: 45px;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .header {
     width: 100%;
@@ -17,19 +28,8 @@
 
   .header__image {
     height: 24px;
-    max-width: 126px;
     margin-left: 19px;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .header {
-    margin: auto;
-  }
-
-  .header__image {
-    height: 33px;
-    margin-left: 19px;
-    margin-top: 45px;
+    margin-top: 28px;
+    padding-bottom: 32px;
   }
 }
