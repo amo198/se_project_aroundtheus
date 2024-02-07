@@ -30,12 +30,5 @@
 @media screen and (max-width: 480px) {
   .footer {
     width: 282px;
-    padding-bottom: 36px;
-  }
-
-  .footer__copyright {
-    margin-bottom: 0;
-    font-size: 14px;
-    line-height: 17px;
   }
 }
