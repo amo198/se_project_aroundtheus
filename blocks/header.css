@@ -1,9 +1,6 @@
 .header {
   margin-top: 45px;
-  border-bottom-color: #545454;
-  opacity: 84;
-  border-bottom-style: solid;
-  border-radius: 1px;
+  border-bottom: 1px solid rgba(84, 84, 84, 0.7);
 }
 
 .header__image {

@@ -54,7 +54,6 @@
   background: transparent url(../images/edit-button.svg) center no-repeat;
   border-style: solid;
   border-color: white;
-  border-radius: 1px;
   border-width: 1px;
   height: 24px;
   width: 24px;
@@ -132,6 +131,7 @@
   .profile__info {
     margin-top: 30px;
     margin-bottom: 36px;
+    text-align: center;
   }
 
   .profile__description {
@@ -147,7 +147,6 @@
   }
 
   .profile__add-button {
-    max-width: 320px;
     padding: 0;
     width: 282px;
     margin: auto;
