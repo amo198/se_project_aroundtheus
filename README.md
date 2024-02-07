@@ -30,7 +30,7 @@ Project features include an unordered list of cards, through a larger screen wit
 ![Preview of project with 3 columns](<images/Screenshot 2024-02-05 at 10.59.10 PM.png>)
 ![Preview of project with 2 columns](<Screenshot 2024-02-05 at 11.04.54 PM.png>)
 
-Link to github page:
+Link to github page: https://amo198.github.io/se_project_aroundtheus/
 
 Video link: https://drive.google.com/file/d/1lmU4U9w_W94OD37eyQe_fpbEah6-EKUM/view?usp=drive_link
 I tried making a shorter version by cutting out all my mumblings: https://drive.google.com/file/d/1MG2Dl856VKmBDJfEgZih5zmyZOk57llh/view?usp=drive_link
