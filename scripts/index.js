@@ -25,36 +25,33 @@ const initialCards = [
   },
 ];
 
-console.log(initialCards);
+/*console.log(initialCards);*/
 
 const profileEditButton = document.querySelector(".profile__edit-button");
-const modalEditMessage = document.querySelector("#modal-edit-message");
-
-profileEditButton.addEventListener("click", function () {
-  modalEditMessage.classList.add("modal_opened");
-});
-
+const modalEditWindow = document.querySelector("#modal-edit-message");
 const modalCloseButton = document.querySelector(".modal__close-button");
+const profileName = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
+const profileNameInput = document.querySelector("#profile-name");
+const profileDescriptionInput = document.querySelector("#profile-description");
+const profileFormElement = document.querySelector(".modal__form");
+const cardList = document.querySelector(".cards__list");
 
-modalCloseButton.addEventListener("click", function () {
-  modalEditMessage.classList.remove("modal_opened");
+profileEditButton.addEventListener("click", () => {
+  modalEditWindow.classList.add("modal_opened");
 });
 
-const profileFormElement = document.querySelector(".modal__form");
-const nameInput = document.querySelector("#profile-name");
-const jobInput = document.querySelector("#about-me");
-const profileName = document.querySelector(".profile__name");
-const profileJob = document.querySelector("profile__description");
+modalCloseButton.addEventListener("click", () => {
+  modalEditWindow.classList.remove("modal_opened");
+});
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = inputName.value;
-  profileAboutMe = inputAboutMe.value;
+  profileName.textContent = profileNameInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
 }
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
-
-/*const cardTemplate = document.querySelector("#card-template");*/
 
 function getCardElement(data) {
   const cardTemplate = document.querySelector("#card-template").content;
@@ -65,8 +62,6 @@ function getCardElement(data) {
   cardImage.src = data.link;
   return cardElement;
 }
-
-const cardList = document.querySelector(".cards__list");
 
 initialCards.forEach((data) => {
   const cardElement = getCardElement(data);
