@@ -31,72 +31,15 @@
         </section>
         <section class="cards page__section">
           <ul class="cards__list">
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-images/vanoise.jpg"
-                alt="Yosemite Valley"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Yosemite Valley</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-images/lake-louise.jpg"
-                alt="Lake Louise"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Lake Louise</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-images/bald-mountains.jpg"
-                alt="Bald Mountains"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Bald Mountains</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-images/latemar.jpg"
-                alt="Latemar"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Latemar</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-images/vanoise.jpg"
-                alt="Vanoise National Park"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Vanoise National Park</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img
-                class="card__image"
-                src="./images/card-images/lago.jpg"
-                alt="Lago di Braies"
-              />
-              <div class="card__description">
-                <h2 class="card__title">Lago di Braies</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
+            <template id="card-template">
+              <li class="card">
+                <img class="card__image" alt="" />
+                <div class="card__description">
+                  <h2 class="card__title"></h2>
+                  <button type="button" class="card__like-button"></button>
+                </div>
+              </li>
+            </template>
           </ul>
         </section>
       </main>
@@ -113,16 +56,16 @@
             <input
               class="modal__form-input"
               type="text"
-              id="name"
+              id="profile-name"
               name="name"
-              placeholder="Jacques Cousteau"
+              placeholder="Name"
             />
             <input
               class="modal__form-input"
               type="text"
-              id="explorer"
-              name="explorer"
-              placeholder="Explorer"
+              id="about-me"
+              name="about me"
+              placeholder="About me"
             />
           </fieldset>
           <button class="modal__submit-button"></button>

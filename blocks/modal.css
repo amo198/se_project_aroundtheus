@@ -53,6 +53,12 @@
   right: -40px;
 }
 
+.modal__close-button:hover {
+  transition: opacity 0.3s ease-in-out;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
 .modal__form-fieldset {
   border-style: none;
   display: flex;
