@@ -113,13 +113,16 @@
   }
 
   .modal__close-button {
+    background: transparent url(../images/Small\ Close\ Icon.svg) center
+      no-repeat;
     height: 26px;
     width: 26px;
-    top: -40px;
-    right: 0px;
+    top: -45px;
+    right: 5px;
   }
 
   .modal__submit-button {
+    background: transparent url(../images/small\ save.svg) center no-repeat;
     height: 46px;
   }
 

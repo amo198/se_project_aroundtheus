@@ -50,13 +50,9 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileName.textContent = profileNameInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-}
-
-function closeProfileSubmit(evt) {
   modalEditWindow.classList.remove("modal_opened");
 }
 
-modalEditWindow.addEventListener("submit", closeProfileSubmit);
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 function getCardElement(data) {
