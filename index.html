@@ -33,6 +33,7 @@
           <ul class="cards__list">
             <template id="card-template">
               <li class="card">
+                <button class="card__delete-button" type="button"></button>
                 <img class="card__image" alt="" />
                 <div class="card__description">
                   <h2 class="card__title"></h2>
@@ -51,7 +52,11 @@
       <div class="modal__container">
         <form class="modal__form" id="profile-edit-fields">
           <h2 class="modal__title">Edit profile</h2>
-          <button type="button" class="modal__close-button"></button>
+          <button
+            type="button"
+            class="modal__close-button"
+            id="edit-profile-close"
+          ></button>
           <fieldset class="modal__form-fieldset">
             <input
               class="modal__form-input"
@@ -70,6 +75,46 @@
           </fieldset>
           <button class="modal__submit-button"></button>
         </form>
+      </div>
+    </div>
+    <div class="modal" id="add-place-form">
+      <div class="modal__container">
+        <form class="modal__form" id="add-place-edit-fields">
+          <h2 class="modal__title">New Place</h2>
+          <button
+            type="button"
+            class="modal__close-button"
+            id="add-place-close"
+          ></button>
+          <fieldset class="modal__form-fieldset">
+            <input
+              class="modal__form-input"
+              type="text"
+              id="place-name"
+              name="place"
+              placeholder="Title"
+            />
+            <input
+              class="modal__form-input"
+              type="text"
+              id="image-link"
+              name="image"
+              placeholder="Image URL"
+            />
+          </fieldset>
+          <button class="modal__create-button"></button>
+        </form>
+      </div>
+    </div>
+    <div class="modal modal_image-popup" id="image-popup">
+      <div class="modal__container_image-popup">
+        <img class="modal__image-preview" src="" alt="" />
+        <h3 class="modal__image-title"></h3>
+        <button
+          type="button"
+          class="modal__close-button_image-popup"
+          id="image-preview-close"
+        ></button>
       </div>
     </div>
     <script src="./scripts/index.js"></script>
