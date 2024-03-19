@@ -117,7 +117,7 @@
   cursor: pointer;
 }
 
-/* This is the image modal section */
+/*This is the image modal section */
 
 .modal_image-popup {
   position: fixed;
@@ -151,17 +151,6 @@
   font-size: 12px;
   line-height: 1.1;
   color: #fff;
-}
-
-.modal__close-button_image-popup {
-  background: transparent url(../images/Close\ Icon.svg) center no-repeat;
-  border-style: none;
-  position: absolute;
-  padding: 0;
-  top: -45px;
-  right: -45px;
-  height: 40px;
-  width: 40px;
 }
 
 .modal__close-button_image-popup:hover {
@@ -200,7 +189,8 @@
   .modal__form-input:last-of-type {
     margin-bottom: 45px;
   }
-
+}
+/*
   .modal__close-button_image-popup {
     background: transparent url(../images/image\ close\ icon.svg) center
       no-repeat;
@@ -210,3 +200,15 @@
     width: 30px;
   }
 }
+
+/*
+.modal__close-button_image-popup {
+  background: transparent url(../images/Close\ Icon.svg) center no-repeat;
+  border-style: none;
+  position: absolute;
+  padding: 0;
+  top: -45px;
+  right: -45px;
+  height: 40px;
+  width: 40px;
+}*/
