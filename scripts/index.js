@@ -27,7 +27,7 @@ const initialCards = [
 
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileEditWindow = document.querySelector("#profile-edit-window");
-const closeButton = document.querySelectorAll(".modal__close-button");
+const closeButtons = document.querySelectorAll(".modal__close-button");
 const profileName = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileNameInput = document.querySelector("#profile-name");
@@ -62,7 +62,7 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
 }
 
-closeButton.forEach((button) => {
+closeButtons.forEach((button) => {
   const modal = button.closest(".modal");
   button.addEventListener("click", () => closeModal(modal));
 });
@@ -76,7 +76,7 @@ function handleProfileFormSubmit(evt) {
 
 function renderCard(data, cardList, method = "prepend") {
   const cardElement = getCardElement(data);
-  cardList.prepend(cardElement);
+  cardList[method](cardElement);
 }
 
 function handleAddPlaceFormCreate(evt) {
