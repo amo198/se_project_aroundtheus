@@ -26,8 +26,8 @@ const initialCards = [
 ];
 
 const profileEditButton = document.querySelector(".profile__edit-button");
-const profileEditWindow = document.querySelector("#modal-edit-message");
-const profileCloseButton = document.querySelector(".modal__close-button");
+const profileEditWindow = document.querySelector("#profile-edit-window");
+const closeButton = document.querySelectorAll(".modal__close-button"); //something is happening here
 const profileName = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileNameInput = document.querySelector("#profile-name");
@@ -37,7 +37,7 @@ const cardList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content;
 const profileAddButton = document.querySelector(".profile__add-button");
 const addPlaceWindow = document.querySelector("#add-place-form");
-const addPlaceCloseButton = document.querySelector(".modal__close-button");
+const addPlaceCloseButton = document.querySelectorAll(".modal__close-button");
 const addNewPlaceForm = document.forms["add-place-edit-fields"];
 const placeNameInput = addNewPlaceForm.querySelector("#place-name");
 const placeImageInput = addNewPlaceForm.querySelector("#image-link");
@@ -66,16 +66,9 @@ function closeModal(modal) {
   modal.classList.remove("modal_opened");
 }
 
-profileCloseButton.addEventListener("click", () => {
-  closeModal(profileEditWindow);
-});
-
-addPlaceCloseButton.addEventListener("click", () => {
-  closeModal(addPlaceWindow);
-});
-
-previewImageModalCloseButton.addEventListener("click", () => {
-  closeModal(previewImageModal);
+closeButton.forEach((button) => {
+  const modal = button.closest(".modal");
+  button.addEventListener("click", () => closeModal(modal));
 });
 
 function handleProfileFormSubmit(evt) {
@@ -132,6 +125,3 @@ initialCards.forEach((data) => renderCard(data, cardList));
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 addNewPlaceForm.addEventListener("submit", handleAddPlaceFormCreate);
-
-/*const cardElement = getCardElement({ name, link });
-  cardList.prepend(cardElement);*/
