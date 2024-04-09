@@ -28,16 +28,16 @@ function checkInputValidity(formElement, inputElement, config) {
   }
 }
 
-function hasInvalidInput(inputsElement) {
-  return !inputsElement.every((inputElement) => inputElement.validity.valid);
+function hasInvalidInput(inputElements) {
+  return !inputElements.forEach((inputElement) => inputElement.validity.valid);
 }
 
 function toggleButtonState(
-  inputsElement,
+  inputElements,
   submitButton,
   { inactiveButtonClass }
 ) {
-  if (hasInvalidInput(inputsElement)) {
+  if (hasInvalidInput(inputElements)) {
     submitButton.classList.add(inactiveButtonClass);
     submitButton.disabled = true;
   } else {
@@ -48,12 +48,12 @@ function toggleButtonState(
 
 function setEventListeners(formElement, config) {
   const inputSelector = config.inputSelector;
-  const inputsElement = formElement.querySelectorAll(inputSelector);
+  const inputElements = formElement.querySelectorAll(inputSelector);
   const submitButton = formElement.querySelectorAll(".modal__submit-button");
-  inputsElement.forEach((inputElement) => {
+  inputElements.forEach((inputElement) => {
     inputElement.addEventListener("input", (evt) => {
       checkInputValidity(formElement, inputElement, config);
-      toggleButtonState(inputsElement, submitButton, config);
+      toggleButtonState(inputElements, submitButton, config);
     });
   });
 }
