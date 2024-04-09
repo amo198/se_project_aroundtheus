@@ -64,16 +64,26 @@
               id="profile-name"
               name="name"
               placeholder="Name"
+              minlength="2"
+              maxlength="40"
+              required
             />
+            <span class="modal__error" id="profile-name-error"></span>
             <input
               class="modal__form-input"
               type="text"
               id="profile-description"
               name="description"
               placeholder="About me"
+              minlength="2"
+              maxlength="200"
+              required
             />
+            <span class="modal__error" id="profile-description-error"></span>
           </fieldset>
-          <button class="modal__submit-button"></button>
+          <button
+            class="modal__submit-button modal__submit-button_disabled"
+          ></button>
         </form>
       </div>
     </div>
@@ -93,16 +103,24 @@
               id="place-name"
               name="place"
               placeholder="Title"
+              minlength="1"
+              maxlength="30"
+              required
             />
+            <span class="modal__error" id="place-name-error"></span>
             <input
               class="modal__form-input"
-              type="text"
+              type="url"
               id="image-link"
               name="image"
               placeholder="Image URL"
+              required
             />
+            <span class="modal__error" id="image-link-error"></span>
           </fieldset>
-          <button class="modal__create-button"></button>
+          <button
+            class="modal__submit-button modal__submit-button_disabled"
+          ></button>
         </form>
       </div>
     </div>
@@ -118,5 +136,6 @@
       </div>
     </div>
     <script src="./scripts/index.js"></script>
+    <script src="./scripts/validation.js"></script>
   </body>
 </html>
