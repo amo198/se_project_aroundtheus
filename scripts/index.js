@@ -46,6 +46,8 @@ const previewImageTitle = document.querySelector(".modal__image-title");
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", closeModalEsc);
+  modal.addEventListener("mousedown", closeModalClick);
 }
 
 profileAddButton.addEventListener("click", () => {
@@ -60,6 +62,20 @@ profileEditButton.addEventListener("click", () => {
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.addEventListener("keydown", closeModalEsc);
+}
+
+function closeModalEsc(evt) {
+  if (evt.key === "Escape") {
+    const openModalEsc = document.querySelector(".modal_opened");
+    closeModal(openModalEsc);
+  }
+}
+
+function closeModalClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    closeModal(evt.currentTarget);
+  }
 }
 
 closeButtons.forEach((button) => {

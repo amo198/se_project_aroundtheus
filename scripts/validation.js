@@ -29,7 +29,9 @@ function checkInputValidity(formElement, inputElement, config) {
 }
 
 function hasInvalidInput(inputElements) {
-  return !inputElements.forEach((inputElement) => inputElement.validity.valid);
+  return inputElements.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
 }
 
 function toggleButtonState(
@@ -48,8 +50,8 @@ function toggleButtonState(
 
 function setEventListeners(formElement, config) {
   const inputSelector = config.inputSelector;
-  const inputElements = formElement.querySelectorAll(inputSelector);
-  const submitButton = formElement.querySelectorAll(".modal__submit-button");
+  const inputElements = Array.from(formElement.querySelectorAll(inputSelector));
+  const submitButton = formElement.querySelector(".modal__submit-button");
   inputElements.forEach((inputElement) => {
     inputElement.addEventListener("input", (evt) => {
       checkInputValidity(formElement, inputElement, config);
