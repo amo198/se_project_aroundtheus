@@ -93,12 +93,18 @@
   height: 50px;
 }
 
-.modal__submit-button:hover {
+.modal__submit-button:hover:not(:disabled) {
   transition: opacity 0.3s ease-in-out;
   opacity: 0.8;
   cursor: pointer;
 }
-/* This is the form validation section*/
+
+.modal__submit-button_disabled:hover {
+  opacity: 1;
+  cursor: default;
+}
+
+/* This is the start of the form validation section*/
 
 .modal__form-input_type {
   border-bottom: 1px solid #ff0000;

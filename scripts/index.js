@@ -62,13 +62,13 @@ profileEditButton.addEventListener("click", () => {
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.addEventListener("keydown", closeModalEsc);
+  modal.removeEventListener("keydown", closeModalEsc);
 }
 
 function closeModalEsc(evt) {
   if (evt.key === "Escape") {
-    const openModalEsc = document.querySelector(".modal_opened");
-    closeModal(openModalEsc);
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
   }
 }
 
