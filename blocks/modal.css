@@ -81,10 +81,6 @@
   padding: 0 0 13px;
 }
 
-/*.modal__form-input:last-of-type {
-  margin-bottom: 48px;
-}*/
-
 .modal__form-input::placeholder {
   color: #c4c4c4;
 }
@@ -102,27 +98,7 @@
   opacity: 0.8;
   cursor: pointer;
 }
-
-.modal__create-button {
-  background: transparent url(../images/create\ button.svg) center no-repeat;
-  border-style: none;
-  border-radius: 2px;
-  padding: 0;
-  height: 50px;
-}
-
-.modal__create-button:hover {
-  transition: opacity 0.3s ease-in-out;
-  opacity: 0.8;
-  cursor: pointer;
-}
-
-/* This is the form validation section
-
-.modal__form-input:invalid {
-  border-bottom: 1px solid #ff0000;
-  margin-bottom: 5px;
-}*/
+/* This is the form validation section*/
 
 .modal__form-input_type {
   border-bottom: 1px solid #ff0000;
