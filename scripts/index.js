@@ -62,7 +62,7 @@ profileEditButton.addEventListener("click", () => {
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  modal.removeEventListener("keydown", closeModalEsc);
+  document.removeEventListener("keydown", closeModalEsc);
   modal.removeEventListener("mousedown", closeModalClick);
 }
 
