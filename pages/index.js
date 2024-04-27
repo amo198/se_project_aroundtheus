@@ -46,11 +46,23 @@ const previewImageModal = document.querySelector("#image-popup");
 const previewImage = previewImageModal.querySelector(".modal__image-preview");
 const previewImageTitle = document.querySelector(".modal__image-title");
 
-const cardData = initialCards.forEach((data) => {
+function createCard(data) {
   const card = new Card(data, "#card-template");
-  const cardElement = card.getCardInfo();
-  return cardElement;
-});
+  return card.getCardInfo();
+}
+
+/* initialCards.forEach((data) => {}
+  const card = new Card(data, "#card-template");
+  return card.getCardInfo();
+});*/
+
+function renderCard(data, cardList, method = "prepend") {
+  const cardElement = createCard(data);
+  cardList[method](cardElement);
+}
+
+//const cardElement = createCard(data);
+//cardListEl.prepend(cardElement);
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -99,11 +111,6 @@ function handleProfileFormSubmit(evt) {
   closeModal(profileEditWindow);
 }
 
-function renderCard(data, cardList, method = "prepend") {
-  const cardElement = getCardElement(data);
-  cardList[method](cardElement);
-}
-
 function handleAddPlaceFormCreate(evt) {
   evt.preventDefault();
   const name = placeNameInput.value;
@@ -124,7 +131,6 @@ function getCardElement(data) {
     likeButton.classList.toggle("card__like-button_active");
   });
 */
-
   cardDeleteButton.addEventListener("click", () => {
     cardElement.remove();
   });
