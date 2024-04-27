@@ -1,3 +1,5 @@
+import Card from "../Components/Card.js";
+
 const initialCards = [
   {
     name: "Lago di Braies",
@@ -43,6 +45,12 @@ const placeImageInput = addNewPlaceForm.querySelector("#image-link");
 const previewImageModal = document.querySelector("#image-popup");
 const previewImage = previewImageModal.querySelector(".modal__image-preview");
 const previewImageTitle = document.querySelector(".modal__image-title");
+
+const cardData = initialCards.forEach((data) => {
+  const card = new Card(data, "#card-template");
+  const cardElement = card.getCardInfo();
+  return cardElement;
+});
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -109,12 +117,13 @@ function getCardElement(data) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
   const cardTitle = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
+  //const likeButton = cardElement.querySelector(".card__like-button");
   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
-
+  /*
   likeButton.addEventListener("click", () => {
     likeButton.classList.toggle("card__like-button_active");
   });
+*/
 
   cardDeleteButton.addEventListener("click", () => {
     cardElement.remove();
