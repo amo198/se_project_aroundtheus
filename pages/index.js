@@ -1,4 +1,5 @@
 import Card from "../Components/Card.js";
+import FormValidator from "../Components/FormValidator.js";
 
 const initialCards = [
   {
@@ -47,22 +48,14 @@ const previewImage = previewImageModal.querySelector(".modal__image-preview");
 const previewImageTitle = document.querySelector(".modal__image-title");
 
 function createCard(data) {
-  const card = new Card(data, "#card-template");
+  const card = new Card(data, "#card-template", handleImageClick);
   return card.getCardInfo();
 }
-
-/* initialCards.forEach((data) => {}
-  const card = new Card(data, "#card-template");
-  return card.getCardInfo();
-});*/
 
 function renderCard(data, cardList, method = "prepend") {
   const cardElement = createCard(data);
   cardList[method](cardElement);
 }
-
-//const cardElement = createCard(data);
-//cardListEl.prepend(cardElement);
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
@@ -120,33 +113,11 @@ function handleAddPlaceFormCreate(evt) {
   closeModal(addPlaceWindow);
 }
 
-function getCardElement(data) {
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardImage = cardElement.querySelector(".card__image");
-  const cardTitle = cardElement.querySelector(".card__title");
-  //const likeButton = cardElement.querySelector(".card__like-button");
-  const cardDeleteButton = cardElement.querySelector(".card__delete-button");
-  /*
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-*/
-  cardDeleteButton.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  cardImage.addEventListener("click", () => {
-    openModal(previewImageModal);
-    previewImageTitle.textContent = cardTitle.textContent;
-    previewImage.src = cardImage.src;
-    previewImage.alt = cardTitle.textContent;
-  });
-
-  cardTitle.textContent = data.name;
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-
-  return cardElement;
+function handleImageClick(data) {
+  openModal(previewImageModal);
+  previewImageTitle.textContent = data.name;
+  previewImage.setAttribute("src", data.link);
+  previewImage.setAttribute("alt", data.name);
 }
 
 initialCards.forEach((data) => renderCard(data, cardList));
