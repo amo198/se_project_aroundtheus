@@ -28,6 +28,15 @@ const initialCards = [
   },
 ];
 
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__submit-button",
+  inactiveButtonClass: "modal__submit-button_disabled",
+  inputErrorClass: "modal__form-input_type",
+  errorClass: "modal__error_visible",
+};
+
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileEditWindow = document.querySelector("#profile-edit-window");
 const closeButtons = document.querySelectorAll(".modal__close-button");
@@ -46,6 +55,12 @@ const placeImageInput = addNewPlaceForm.querySelector("#image-link");
 const previewImageModal = document.querySelector("#image-popup");
 const previewImage = previewImageModal.querySelector(".modal__image-preview");
 const previewImageTitle = document.querySelector(".modal__image-title");
+
+const editFormValidator = new FormValidator(config, profileFormElement);
+editFormValidator.enableValidation();
+
+const addFormValidator = new FormValidator(config, addNewPlaceForm);
+addFormValidator.enableValidation();
 
 function createCard(data) {
   const card = new Card(data, "#card-template", handleImageClick);
@@ -71,6 +86,7 @@ profileEditButton.addEventListener("click", () => {
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
   openModal(profileEditWindow);
+  editFormValidator._disableButton();
 });
 
 function closeModal(modal) {
@@ -111,6 +127,7 @@ function handleAddPlaceFormCreate(evt) {
   evt.target.reset();
   renderCard({ name, link }, cardList);
   closeModal(addPlaceWindow);
+  addFormValidator._disableButton();
 }
 
 function handleImageClick(data) {
