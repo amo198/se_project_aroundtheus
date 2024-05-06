@@ -86,7 +86,7 @@ profileEditButton.addEventListener("click", () => {
   profileNameInput.value = profileName.textContent;
   profileDescriptionInput.value = profileDescription.textContent;
   openModal(profileEditWindow);
-  editFormValidator._disableButton();
+  editFormValidator.disableButton();
 });
 
 function closeModal(modal) {

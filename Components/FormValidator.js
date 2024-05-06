@@ -9,7 +9,7 @@ export default class FormValidator {
     this._inputError = config.inputErrorClass;
     this._error = config.errorClass;
 
-    this._forms = formsElement;
+    this._form = formsElement;
   }
 
   _checkInputValidity(inputElement) {
@@ -27,7 +27,7 @@ export default class FormValidator {
   }
 
   _showInputError(inputElement) {
-    const errorMessage = this._forms.querySelector(`#${inputElement.id}-error`);
+    const errorMessage = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputError);
     console.log(inputElement.validity);
     errorMessage.textContent = inputElement.validationMessage;
@@ -35,7 +35,7 @@ export default class FormValidator {
   }
 
   _hideInputError(inputElement) {
-    const errorMessage = this._forms.querySelector(`#${inputElement.id}-error`);
+    const errorMessage = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._inputError);
     errorMessage.textContent = "";
     errorMessage.classList.remove(this._error);
@@ -61,7 +61,7 @@ export default class FormValidator {
 
   _setEventListeners() {
     this._inputList = Array.from(
-      this._forms.querySelectorAll(this._inputSelector)
+      this._form.querySelectorAll(this._inputSelector)
     );
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", (evt) => {
@@ -72,7 +72,7 @@ export default class FormValidator {
   }
 
   enableValidation() {
-    this._forms.addEventListener("input", (evt) => {
+    this._form.addEventListener("input", (evt) => {
       evt.preventDefault();
     });
     this._setEventListeners();
