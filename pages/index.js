@@ -127,7 +127,7 @@ function handleAddPlaceFormCreate(evt) {
   evt.target.reset();
   renderCard({ name, link }, cardList);
   closeModal(addPlaceWindow);
-  addFormValidator._disableButton();
+  addFormValidator.disableButton();
 }
 
 function handleImageClick(data) {
