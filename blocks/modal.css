@@ -104,8 +104,6 @@
   cursor: default;
 }
 
-/* This is the start of the form validation section*/
-
 .modal__form-input_type {
   border-bottom: 1px solid #ff0000;
   margin-bottom: 5px;
@@ -133,8 +131,6 @@
 .modal__submit-button_disabled {
   background: transparent url(../images/disable\ button.svg) center no-repeat;
 }
-
-/*This is the image modal section */
 
 .modal_image-popup {
   position: fixed;
