@@ -1,5 +1,5 @@
 // responsible for opening and closing all the different pop ups
-class Popup {
+export default class Popup {
   constructor({ popupSelector }) {
     this._popupElement = document.querySelector(popupSelector);
   }
@@ -23,6 +23,7 @@ class Popup {
       open(popupSelector);
     });
   }
+}
 }
 
 /*
