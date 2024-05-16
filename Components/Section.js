@@ -1,17 +1,18 @@
 class Section {
-  constructor({ objects, renderer }, cardSelector) {
-    this._objects = objects;
+  constructor({ items, renderer }, '.cards__list') {
+    this._items = items;
     this._renderer = renderer;
-    this._cardSelector = cardSelector;
+    this._cardListSelector = '.cards__list';
   }
 
-  addItem(element) {
-    this._cardSelector.append(element);
+  addItem(item) {
+    this._cardListSelector.prepend(item);
   }
 
   renderItems() {
-    this.renderItems.forEach((item) => {
-      renderer();
+    this._items.forEach((item) => {
+        const cardElement = this._renderer(item);
+        this._cardListSelector.append(cardElement);
     });
   }
 }
