@@ -3,42 +3,8 @@ import FormValidator from "../Components/FormValidator.js";
 import PopupWithImage from "../Components/PopupWithImage.js";
 import PopupWithForm from "../Components/PopupWithForm.js";
 import Section from "../Components/Section.js";
-
-const initialCards = [
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-  },
-];
-
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__form-input",
-  submitButtonSelector: ".modal__submit-button",
-  inactiveButtonClass: "modal__submit-button_disabled",
-  inputErrorClass: "modal__form-input_type",
-  errorClass: "modal__error_visible",
-};
+import { initialCards } from "../utils/Constants.js";
+import { config } from "../utils/Constants.js";
 
 const newCardPopup = new PopupWithForm("#add-place-form", () => {});
 const cardPreview = new PopupWithImage("#image-popup", () => {});
