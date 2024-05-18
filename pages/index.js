@@ -1,6 +1,7 @@
 import Card from "../Components/Card.js";
 import FormValidator from "../Components/FormValidator.js";
-//import Section from "../Components/Section.js";
+import PopupWithImage from "../Components/PopupWithImage.js";
+import Section from "../Components/Section.js";
 
 const initialCards = [
   {
@@ -36,8 +37,20 @@ const config = {
   inactiveButtonClass: "modal__submit-button_disabled",
   inputErrorClass: "modal__form-input_type",
   errorClass: "modal__error_visible",
+  previewImageModal: ".modal__image-preview",
 };
 
+const cardPreview = new PopupWithImage(config.previewImageModal);
+const cardSection = new Section(
+  {
+    renderer: (data) => {
+      items: initialCards, cardSection.addItem(cardElement);
+    },
+  },
+  ".cards__list"
+);
+
+//untouched old code
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileEditWindow = document.querySelector("#profile-edit-window");
 const closeButtons = document.querySelectorAll(".modal__close-button");
@@ -53,9 +66,10 @@ const addPlaceWindow = document.querySelector("#add-place-form");
 const addNewPlaceForm = document.forms["add-place-edit-fields"];
 const placeNameInput = addNewPlaceForm.querySelector("#place-name");
 const placeImageInput = addNewPlaceForm.querySelector("#image-link");
-const previewImageModal = document.querySelector("#image-popup");
+//the three const below have been transferred to Popup with image
+/*const previewImageModal = document.querySelector("#image-popup");
 const previewImage = previewImageModal.querySelector(".modal__image-preview");
-const previewImageTitle = document.querySelector(".modal__image-title");
+const previewImageTitle = document.querySelector(".modal__image-title");*/
 
 const editFormValidator = new FormValidator(config, profileFormElement);
 editFormValidator.enableValidation();
@@ -126,7 +140,8 @@ function handleAddPlaceFormCreate(evt) {
   const name = placeNameInput.value;
   const link = placeImageInput.value;
   evt.target.reset();
-  renderCard({ name, link }, cardList);
+  cardSection.addItem(cardElement);
+  // renderCard({ name, link }, cardList);
   closeModal(addPlaceWindow);
   addFormValidator.disableButton();
 }
@@ -137,8 +152,8 @@ function handleImageClick(data) {
   previewImage.setAttribute("src", data.link);
   previewImage.setAttribute("alt", data.name);
 }
-
+/*
 initialCards.forEach((data) => renderCard(data, cardList));
-
+*/
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 addNewPlaceForm.addEventListener("submit", handleAddPlaceFormCreate);

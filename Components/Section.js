@@ -1,18 +1,23 @@
 export default class Section {
-  constructor({ items, renderer }, '.cards__list') {
+  constructor({ items, renderer }, classSelector) {
     this._items = items;
     this._renderer = renderer;
-    this._cardListSelector = '.cards__list';
+    this._classSelector = classSelector;
+    this._cardContainer = document.querySelector(classSelector);
   }
 
   addItem(item) {
-    this._cardListSelector.prepend(item);
+    this._cardContainer.prepend(item);
   }
 
   renderItems() {
     this._items.forEach((item) => {
-        const cardElement = this._renderer(item);
-        this._cardListSelector.append(cardElement);
+      this._renderer(item);
     });
   }
 }
+
+// Old code
+
+/*const cardElement = this._renderer(item);
+  this._cardContainer.append(cardElement);*/
