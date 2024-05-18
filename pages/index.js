@@ -1,6 +1,7 @@
 import Card from "../Components/Card.js";
 import FormValidator from "../Components/FormValidator.js";
 import PopupWithImage from "../Components/PopupWithImage.js";
+import PopupWithForm from "../Components/PopupWithForm.js";
 import Section from "../Components/Section.js";
 
 const initialCards = [
@@ -37,10 +38,10 @@ const config = {
   inactiveButtonClass: "modal__submit-button_disabled",
   inputErrorClass: "modal__form-input_type",
   errorClass: "modal__error_visible",
-  previewImageModal: ".modal__image-preview",
 };
 
-const cardPreview = new PopupWithImage(config.previewImageModal);
+const newCardPopup = new PopupWithForm("#add-place-form", () => {});
+const cardPreview = new PopupWithImage("#image-popup", () => {});
 const cardSection = new Section(
   {
     renderer: (data) => {
@@ -62,7 +63,7 @@ const profileFormElement = document.forms["profile-edit-fields"];
 const cardList = document.querySelector(".cards__list");
 const cardTemplate = document.querySelector("#card-template").content;
 const profileAddButton = document.querySelector(".profile__add-button");
-const addPlaceWindow = document.querySelector("#add-place-form");
+//const addPlaceWindow = document.querySelector("#add-place-form");
 const addNewPlaceForm = document.forms["add-place-edit-fields"];
 const placeNameInput = addNewPlaceForm.querySelector("#place-name");
 const placeImageInput = addNewPlaceForm.querySelector("#image-link");
