@@ -13,8 +13,10 @@ const profileEditPopup = new PopupWithForm("#profile-edit-window", (evt) => {
 const cardPreview = new PopupWithImage("#image-popup", () => {});
 const cardSection = new Section(
   {
-    renderer: (data) => {
-      items: initialCards, cardSection.addItem(cardElement);
+    items: initialCards,
+    renderer: (cardData) => {
+      const cardElement = createCard(cardData);
+      cardSection.addItem(cardElement);
     },
   },
   ".cards__list"
@@ -54,21 +56,21 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addNewPlaceForm);
 addFormValidator.enableValidation();
 
-function createCard(data) {
-  const card = new Card(data, "#card-template", handleImageClick);
+function createCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleImageClick);
   return card.getCardInfo();
 }
-
-function renderCard(data, cardList, method = "prepend") {
-  const cardElement = createCard(data);
+/*
+function renderCard(cardData, cardList, method = "prepend") {
+  const cardElement = createCard(cardData);
   cardList[method](cardElement);
 }
-/*
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", closeModalEsc);
   modal.addEventListener("mousedown", closeModalClick);
-}*/
+
 
 profileAddButton.addEventListener("click", () => {
   addNewPlaceForm.open();
@@ -79,4 +81,4 @@ profileEditButton.addEventListener("click", () => {
   //profileDescriptionInput.value = profileDescription.textContent;
   profileEditForm.open();
   editFormValidator.disableButton();
-});
+});}*/
