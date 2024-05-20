@@ -1,7 +1,7 @@
 // responsible for opening and closing all the different pop ups
 export default class Popup {
   constructor({ popupSelector }) {
-    this._popupElement = document.querySelector(popupSelector);
+    this._popupElement = popupSelector;
   }
 
   open() {
@@ -12,21 +12,20 @@ export default class Popup {
     this._popupElement.classList.remove("modal_opened");
   }
 
-  _handleEscClose(evt) {
-    if (evt.key === "Escape") {
+  _handleEscClose = () => {
+    if (e.key === "Escape") {
       this.close();
     }
-  }
+  };
 
   setEventListeners() {
-    document.addEventListener("click", () => {
+    this._popupElement.addEventListener("click", () => {
       this.open();
     });
-    document.addEventListener("keydown", _handleEscClose());
-    document.addEventListener("mousedown", close());
+    this._popupElement.addEventListener("keydown", this._handleEscClose);
+    this._popupElement.addEventListener("mousedown", this.close());
   }
 }
-
 /*
 function openModal(modal) {
   modal.classList.add("modal_opened");

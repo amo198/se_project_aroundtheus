@@ -3,7 +3,6 @@ export default class Section {
     this._items = items;
     this._renderer = renderer;
     this._cardContainer = document.querySelector(containerSelector);
-    this.renderItems();
   }
 
   renderItems() {
