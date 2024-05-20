@@ -5,19 +5,18 @@ import PopupWithForm from "../Components/PopupWithForm.js";
 import Section from "../Components/Section.js";
 import { initialCards, config } from "../utils/Constants.js";
 
+//Button const
 const closeButtons = document.querySelectorAll(".modal__close-button");
-
-//initialize form validator classes
-
-//Edit profile consts
-const profileFormElement = document.forms["profile-edit-fields"];
-const profileEditWindow = document.querySelector("#profile-edit-window");
+const profileAddButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__edit-button");
 
-//New card consts
+//Edit profile window consts
+const profileFormElement = document.forms["profile-edit-fields"];
+const profileEditWindow = document.querySelector("#profile-edit-window");
+
+//New card window consts
 const addNewPlaceForm = document.forms["add-place-edit-fields"];
 const addPlaceWindow = document.querySelector("#add-place-form");
-const profileAddButton = document.querySelector(".profile__add-button");
 const placeNameInput = addNewPlaceForm.querySelector("#place-name");
 const placeImageInput = addNewPlaceForm.querySelector("#image-link");
 
@@ -32,14 +31,14 @@ const cardSection = new Section(
   ".cards__list"
 );
 
-function renderCard(cardData) {
-  const card = new Card(cardData, "#card-template", handleImageClick);
+function renderCard(data) {
+  const card = new Card(data, "#card-template", handleImageClick);
   const cardElement = card.getCardInfo();
   cardSection.addItem(cardElement);
 }
 
 //Initializing add place popup window
-const addPlacePopup = new PopupWithForm(addPlaceWindow, (data) => {
+const addPlacePopup = new PopupWithForm(addPlaceWindow, () => {
   cardSection.addItem(cardElement);
   addPlacePopup.close();
   addPlacePopup.resetForm();
@@ -53,16 +52,9 @@ const profileEditPopup = new PopupWithForm(profileEditWindow, (evt) => {
 });
 profileEditPopup.setEventListeners();
 
-const cardPreview = new PopupWithImage("#image-popup", (data) => {
+const cardPreview = new PopupWithImage("#image-popup", () => {
   cardPreview.open();
 });
-
-function handleAddCardFormSubmit(data) {
-  const { name: title, link: link } = data;
-  const cardData = { name: title, link: link };
-  renderCard(cardData);
-  addPlacePopup.close();
-}
 
 function handleImageClick(data) {
   cardPreview.open();
@@ -81,10 +73,43 @@ profileAddButton.addEventListener("click", () => {
   addNewPlaceForm.open();
 });
 
-profileEditButton.addEventListener("click", () => {
+//must fix
+function handleAddPlaceFormCreate(evt) {
+  evt.preventDefault();
+  const name = placeNameInput.value;
+  const link = placeImageInput.value;
+  evt.target.reset();
+  cardSection.addItem(cardElement);
+  // renderCard({ name, link }, cardList);
+  closeModal(addPlaceWindow);
+  addFormValidator.disableButton();
+}
+
+function handleAddCardFormSubmit(data) {
+  const { name: title, link: link } = data;
+  const cardData = { name: title, link: link };
+  renderCard(data);
+  addPlacePopup.close();
+}
+
+profileEditButton.addEventListener("click", (name, description) => {
+  userInfo.getUserInfo();
+  this._profileNameInput.textContent = name;
+  this._profileDescriptionInput.textContent = description;
   profileEditForm.open();
   editFormValidator.disableButton();
 });
+
+//must fix, maybe not relevant anymore
+function handleProfileFormSubmit(evt) {
+  //evt.preventDefault();
+  profileName.textContent = profileNameInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  //closeModal(profileEditWindow);
+}
+
+profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+addNewPlaceForm.addEventListener("submit", handleAddPlaceFormCreate);
 
 /* Old Code
 function closeModal(modal) {
