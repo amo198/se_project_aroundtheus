@@ -5,7 +5,7 @@ import PopupWithForm from "../Components/PopupWithForm.js";
 import Section from "../Components/Section.js";
 import { initialCards, config } from "../utils/Constants.js";
 
-//Button const
+//Button consts
 const closeButtons = document.querySelectorAll(".modal__close-button");
 const profileAddButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__edit-button");
@@ -73,7 +73,7 @@ profileAddButton.addEventListener("click", () => {
   addNewPlaceForm.open();
 });
 
-//must fix
+//must fix handle add place form create and submit
 function handleAddPlaceFormCreate(evt) {
   evt.preventDefault();
   const name = placeNameInput.value;
