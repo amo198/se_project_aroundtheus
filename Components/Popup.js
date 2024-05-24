@@ -1,7 +1,7 @@
 // responsible for opening and closing all the different pop ups
 export default class Popup {
   constructor({ popupSelector }) {
-    this._popupElement = popupSelector;
+    this._popupElement = document.querySelector(popupSelector);
   }
 
   open() {

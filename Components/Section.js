@@ -15,8 +15,3 @@ export default class Section {
     this._cardContainer.prepend(item);
   }
 }
-
-// Old code
-
-/*const cardElement = this._renderer(item);
-  this._cardContainer.append(cardElement);*/

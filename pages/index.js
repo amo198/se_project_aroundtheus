@@ -25,42 +25,36 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (data) => {
-      return renderCard(data);
+      const card = new Card(data, "#card-template", handleImageClick);
+      const cardElement = card.getCardInfo();
+      cardSection.addItem(cardElement);
     },
   },
   ".cards__list"
 );
 
-function renderCard(data) {
-  const card = new Card(data, "#card-template", handleImageClick);
-  const cardElement = card.getCardInfo();
-  cardSection.addItem(cardElement);
-}
+cardSection.renderItems();
 
 //Initializing add place popup window
-const addPlacePopup = new PopupWithForm(addPlaceWindow, () => {
-  cardSection.addItem(cardElement);
-  addPlacePopup.close();
-  addPlacePopup.resetForm();
+const addPlacePopup = new PopupWithForm("#add-place-form", () => {
+  //cardSection.addItem(cardElement);
+  //addPlacePopup.close();
+  //addPlacePopup.resetForm();
+  addPlacePopup.open();
 });
-addPlacePopup.setEventListeners();
+//addPlacePopup.setEventListeners();
 
 //Initializing add place popup window
-const profileEditPopup = new PopupWithForm(profileEditWindow, (evt) => {
+const profileEditPopup = new PopupWithForm("#profile-edit-window", (evt) => {
   evt.preventDefault();
   profileEditPopup.close();
 });
 profileEditPopup.setEventListeners();
 
-const cardPreview = new PopupWithImage("#image-popup", () => {
-  cardPreview.open();
-});
+const cardPreview = new PopupWithImage("#image-popup", handleImageClick);
 
 function handleImageClick(data) {
-  cardPreview.open();
-  this._previewImageTitle.textContent = data.name;
-  this._previewImage.setAttribute("src", data.link);
-  this._previewImage.setAttribute("alt", data.name);
+  cardPreview.open(data);
 }
 
 const editFormValidator = new FormValidator(config, profileFormElement);
@@ -69,10 +63,6 @@ editFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, addNewPlaceForm);
 addFormValidator.enableValidation();
 
-profileAddButton.addEventListener("click", () => {
-  addNewPlaceForm.open();
-});
-
 //must fix handle add place form create and submit
 function handleAddPlaceFormCreate(evt) {
   evt.preventDefault();
@@ -80,15 +70,12 @@ function handleAddPlaceFormCreate(evt) {
   const link = placeImageInput.value;
   evt.target.reset();
   cardSection.addItem(cardElement);
-  // renderCard({ name, link }, cardList);
   closeModal(addPlaceWindow);
   addFormValidator.disableButton();
 }
 
 function handleAddCardFormSubmit(data) {
-  const { name: title, link: link } = data;
-  const cardData = { name: title, link: link };
-  renderCard(data);
+  renderCard({ name: data.title, link: data.link });
   addPlacePopup.close();
 }
 
@@ -100,6 +87,8 @@ profileEditButton.addEventListener("click", (name, description) => {
   editFormValidator.disableButton();
 });
 
+profileAddButton.addEventListener("click", addPlacePopup);
+
 //must fix, maybe not relevant anymore
 function handleProfileFormSubmit(evt) {
   //evt.preventDefault();
@@ -109,7 +98,7 @@ function handleProfileFormSubmit(evt) {
 }
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
-addNewPlaceForm.addEventListener("submit", handleAddPlaceFormCreate);
+//addNewPlaceForm.addEventListener("submit", handleAddPlaceFormCreate);
 
 /* Old Code
 function closeModal(modal) {
