@@ -16,6 +16,14 @@ export default class PopupWithFrom extends Popup {
     super.close();
   }
 
+  _getInputValues() {
+    const inputList = Array.from(this._popupForm.querySelector(inputSelector));
+    const cardData = inputList.forEach((input) => {
+      data[input.name] = input.value;
+    });
+    return cardData;
+  }
+
   setEventListeners() {
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
