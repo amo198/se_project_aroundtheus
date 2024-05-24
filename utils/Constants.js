@@ -34,6 +34,7 @@ export const config = {
   errorClass: "modal__error_visible",
 };
 
+//edit profile const
 const profileName = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 
