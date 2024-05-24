@@ -34,12 +34,13 @@ export const config = {
   errorClass: "modal__error_visible",
 };
 
+const profileName = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
+
 /* Moved constants
 
 const cardTemplate = document.querySelector("#card-template").content;
 
-const profileName = document.querySelector(".profile__title");
-const profileDescription = document.querySelector(".profile__description");
 const profileNameInput = document.querySelector("#profile-name");
 const profileDescriptionInput = document.querySelector("#profile-description");
 

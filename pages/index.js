@@ -12,11 +12,11 @@ const profileEditButton = document.querySelector(".profile__edit-button");
 
 //Edit profile window consts
 const profileFormElement = document.forms["profile-edit-fields"];
-const profileEditWindow = document.querySelector("#profile-edit-window");
+//const profileEditWindow = document.querySelector("#profile-edit-window");
 
 //New card window consts
 const addNewPlaceForm = document.forms["add-place-edit-fields"];
-const addPlaceWindow = document.querySelector("#add-place-form");
+//const addPlaceWindow = document.querySelector("#add-place-form");
 const placeNameInput = addNewPlaceForm.querySelector("#place-name");
 const placeImageInput = addNewPlaceForm.querySelector("#image-link");
 
@@ -45,11 +45,15 @@ const addPlacePopup = new PopupWithForm("#add-place-form", () => {
 //addPlacePopup.setEventListeners();
 
 //Initializing add place popup window
-const profileEditPopup = new PopupWithForm("#profile-edit-window", (evt) => {
-  evt.preventDefault();
-  profileEditPopup.close();
-});
+const profileEditPopup = new PopupWithForm(
+  "#profile-edit-window",
+  openEditProfile
+);
 profileEditPopup.setEventListeners();
+
+function openEditProfile() {
+  profileEditPopup.open();
+}
 
 const cardPreview = new PopupWithImage("#image-popup", handleImageClick);
 
@@ -91,14 +95,12 @@ profileAddButton.addEventListener("click", addPlacePopup);
 
 //must fix, maybe not relevant anymore
 function handleProfileFormSubmit(evt) {
-  //evt.preventDefault();
-  profileName.textContent = profileNameInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  //closeModal(profileEditWindow);
+  //profileName
+  //profileDescription
 }
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
-//addNewPlaceForm.addEventListener("submit", handleAddPlaceFormCreate);
+addNewPlaceForm.addEventListener("submit", handleAddPlaceFormCreate);
 
 /* Old Code
 function closeModal(modal) {
