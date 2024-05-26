@@ -5,6 +5,7 @@ import PopupWithForm from "../Components/PopupWithForm.js";
 import Section from "../Components/Section.js";
 import UserInfo from "../Components/UserInfo.js";
 import { initialCards, config } from "../utils/Constants.js";
+import Popup from "../Components/Popup.js";
 
 //Button consts
 const closeButtons = document.querySelectorAll(".modal__close-button");
@@ -39,12 +40,10 @@ cardSection.renderItems();
 const userInfo = new UserInfo();
 
 //Initializing add place popup window
-const addPlacePopup = new PopupWithForm("#add-place-form", () => {
-  //cardSection.addItem(cardElement);
-  //addPlacePopup.close();
-  //addPlacePopup.resetForm();
-  addPlacePopup.open();
-});
+const addPlacePopup = new PopupWithForm(
+  "#add-place-form",
+  handleAddCardFormSubmit
+);
 //addPlacePopup.setEventListeners();
 
 //Initializing add place popup window
@@ -52,7 +51,7 @@ const profileEditPopup = new PopupWithForm(
   "#profile-edit-window",
   openEditProfile
 );
-profileEditPopup.setEventListeners();
+//profileEditPopup.setEventListeners();
 
 function openEditProfile() {
   profileEditPopup.open();
@@ -73,17 +72,16 @@ addFormValidator.enableValidation();
 //must fix handle add place form create and submit
 function handleAddPlaceFormCreate(evt) {
   evt.preventDefault();
-  const name = placeNameInput.value;
-  const link = placeImageInput.value;
   evt.target.reset();
+  handleAddCardFormSubmit();
   cardSection.addItem(cardElement);
-  closeModal(addPlaceWindow);
+  //closeModal(addPlaceWindow);
   addFormValidator.disableButton();
 }
 
-function handleAddCardFormSubmit(inputValues) {
-  cardSection.addItem(newCard.getView());
-  addPlacePopup.close();
+function handleAddCardFormSubmit(name, link) {
+  name.value = placeNameInput.value;
+  link.value = placeImageInput.value;
 }
 
 profileEditButton.addEventListener("click", (name, description) => {
@@ -98,8 +96,10 @@ profileAddButton.addEventListener("click", addPlacePopup);
 
 //must fix, maybe not relevant anymore
 function handleProfileFormSubmit(evt) {
-  //profileName
-  //profileDescription
+  evt.preventDefault();
+  userInfo.setUserInfo();
+  //closeModal(profileEditWindow);
+  profileEditPopup.close();
 }
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
