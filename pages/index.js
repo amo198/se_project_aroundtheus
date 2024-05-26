@@ -44,18 +44,14 @@ const addPlacePopup = new PopupWithForm(
   "#add-place-form",
   handleAddCardFormSubmit
 );
-//addPlacePopup.setEventListeners();
+addPlacePopup.setEventListeners();
 
 //Initializing add place popup window
 const profileEditPopup = new PopupWithForm(
   "#profile-edit-window",
-  openEditProfile
+  handleProfileFormSubmit
 );
-//profileEditPopup.setEventListeners();
-
-function openEditProfile() {
-  profileEditPopup.open();
-}
+profileEditPopup.setEventListeners();
 
 const cardPreview = new PopupWithImage("#image-popup", handleImageClick);
 
@@ -79,9 +75,12 @@ function handleAddPlaceFormCreate(evt) {
   addFormValidator.disableButton();
 }
 
+addNewPlaceForm.addEventListener("submit", handleAddPlaceFormCreate);
+
 function handleAddCardFormSubmit(name, link) {
   name.value = placeNameInput.value;
   link.value = placeImageInput.value;
+  cardSection.addItem(cardElement);
 }
 
 profileEditButton.addEventListener("click", (name, description) => {
@@ -102,8 +101,7 @@ function handleProfileFormSubmit(evt) {
   profileEditPopup.close();
 }
 
-profileFormElement.addEventListener("submit", handleProfileFormSubmit);
-addNewPlaceForm.addEventListener("submit", handleAddPlaceFormCreate);
+profileEditPopup.addEventListener("submit", handleProfileFormSubmit);
 
 /* Old Code
 function closeModal(modal) {
