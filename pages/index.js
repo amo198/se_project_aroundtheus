@@ -3,6 +3,7 @@ import FormValidator from "../Components/FormValidator.js";
 import PopupWithImage from "../Components/PopupWithImage.js";
 import PopupWithForm from "../Components/PopupWithForm.js";
 import Section from "../Components/Section.js";
+import UserInfo from "../Components/UserInfo.js";
 import { initialCards, config } from "../utils/Constants.js";
 
 //Button consts
@@ -34,6 +35,8 @@ const cardSection = new Section(
 );
 
 cardSection.renderItems();
+
+const userInfo = new UserInfo();
 
 //Initializing add place popup window
 const addPlacePopup = new PopupWithForm("#add-place-form", () => {
@@ -78,8 +81,8 @@ function handleAddPlaceFormCreate(evt) {
   addFormValidator.disableButton();
 }
 
-function handleAddCardFormSubmit(data) {
-  renderCard({ name: data.title, link: data.link });
+function handleAddCardFormSubmit(inputValues) {
+  cardSection.addItem(newCard.getView());
   addPlacePopup.close();
 }
 
