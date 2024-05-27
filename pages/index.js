@@ -19,8 +19,6 @@ const profileFormElement = document.forms["profile-edit-fields"];
 //New card window consts
 const addNewPlaceForm = document.forms["add-place-edit-fields"];
 //const addPlaceWindow = document.querySelector("#add-place-form");
-const placeNameInput = addNewPlaceForm.querySelector("#place-name");
-const placeImageInput = addNewPlaceForm.querySelector("#image-link");
 
 //Initializing cards
 const cardSection = new Section(
@@ -37,14 +35,19 @@ const cardSection = new Section(
 
 cardSection.renderItems();
 
-const userInfo = new UserInfo();
+//const userInfo = new UserInfo();
 
 //Initializing add place popup window
 const addPlacePopup = new PopupWithForm(
   "#add-place-form",
   handleAddCardFormSubmit
 );
+
 addPlacePopup.setEventListeners();
+
+profileAddButton.addEventListener("click", () => {
+  addPlacePopup.open();
+});
 
 //Initializing add place popup window
 const profileEditPopup = new PopupWithForm(
@@ -69,46 +72,42 @@ addFormValidator.enableValidation();
 function handleAddPlaceFormCreate(evt) {
   evt.preventDefault();
   evt.target.reset();
-  handleAddCardFormSubmit();
-  cardSection.addItem(cardElement);
+  //handleAddCardFormSubmit();
   //closeModal(addPlaceWindow);
   addFormValidator.disableButton();
 }
 
-addNewPlaceForm.addEventListener("submit", handleAddPlaceFormCreate);
-
-function handleAddCardFormSubmit(name, link) {
-  name.value = placeNameInput.value;
-  link.value = placeImageInput.value;
-  cardSection.addItem(cardElement);
+function handleAddCardFormSubmit(inputValues) {
+  console.log(inputValues);
 }
 
 profileEditButton.addEventListener("click", (name, description) => {
-  userInfo.getUserInfo();
+  //userInfo.getUserInfo();
   this._profileNameInput.textContent = name;
   this._profileDescriptionInput.textContent = description;
   profileEditForm.open();
   editFormValidator.disableButton();
 });
 
-profileAddButton.addEventListener("click", addPlacePopup);
-
 //must fix, maybe not relevant anymore
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  userInfo.setUserInfo();
+  //userInfo.setUserInfo();
   //closeModal(profileEditWindow);
   profileEditPopup.close();
 }
 
+/* Old Code
+
 profileEditPopup.addEventListener("submit", handleProfileFormSubmit);
 
-/* Old Code
+
 function closeModal(modal) {
  modal.classList.remove("modal_opened");
  document.removeEventListener("keydown", closeModalEsc);
  modal.removeEventListener("mousedown", closeModalClick);
 }
+
 
 
 function closeModalEsc(evt) {
@@ -174,10 +173,6 @@ function handleProfileFormSubmit(evt) {
  //closeModal(profileEditWindow);
 }
 
-
-const profileEditButton = document.querySelector(".profile__edit-button");
 const profileEditWindow = document.querySelector("#profile-edit-window");
-const closeButtons = document.querySelectorAll(".modal__close-button");
 const profileFormElement = document.forms["profile-edit-fields"];
-const profileAddButton = document.querySelector(".profile__add-button");
 const addPlaceWindow = document.querySelector("#add-place-form");*/

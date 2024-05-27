@@ -17,10 +17,13 @@ export default class PopupWithFrom extends Popup {
   }
 
   _getInputValues() {
-    const inputList = Array.from(this._popupForm.querySelector(inputSelector));
-    const cardData = inputList.forEach((input) => {
-      data[input.name] = input.value;
+    const inputList = this._popupForm.querySelectorAll(".modal__form-input");
+    const cardData = {};
+    inputList.forEach((input) => {
+      cardData[input.name] = input.value;
+      cardData[input.link] = input.link;
     });
+
     return cardData;
   }
 
@@ -28,6 +31,10 @@ export default class PopupWithFrom extends Popup {
     super.setEventListeners();
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
+      this._handleFormSubmit(this._getInputValues());
     });
   }
 }
+
+//const placeNameInput = this._popupForm.querySelector("#place-name");
+//const placeImageInput = this._popupForm.querySelector("#image-link");
