@@ -8,7 +8,7 @@ import { initialCards, config } from "../utils/Constants.js";
 import Popup from "../Components/Popup.js";
 
 //Button consts
-const closeButtons = document.querySelectorAll(".modal__close-button");
+//const closeButtons = document.querySelectorAll(".modal__close-button");
 const profileAddButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__edit-button");
 
@@ -45,16 +45,22 @@ const addPlacePopup = new PopupWithForm(
 
 addPlacePopup.setEventListeners();
 
-profileAddButton.addEventListener("click", () => {
-  addPlacePopup.open();
-});
-
 //Initializing add place popup window
 const profileEditPopup = new PopupWithForm(
   "#profile-edit-window",
   handleProfileFormSubmit
 );
 profileEditPopup.setEventListeners();
+
+//buttons
+
+profileAddButton.addEventListener("click", () => {
+  addPlacePopup.open();
+});
+
+profileEditButton.addEventListener("click", () => {
+  profileEditPopup.open();
+});
 
 const cardPreview = new PopupWithImage("#image-popup", handleImageClick);
 
@@ -80,14 +86,14 @@ function handleAddPlaceFormCreate(evt) {
 function handleAddCardFormSubmit(inputValues) {
   console.log(inputValues);
 }
-
+/*
 profileEditButton.addEventListener("click", (name, description) => {
   //userInfo.getUserInfo();
   this._profileNameInput.textContent = name;
   this._profileDescriptionInput.textContent = description;
   profileEditForm.open();
   editFormValidator.disableButton();
-});
+});*/
 
 //must fix, maybe not relevant anymore
 function handleProfileFormSubmit(evt) {
