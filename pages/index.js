@@ -34,8 +34,11 @@ const cardSection = new Section(
 );
 
 cardSection.renderItems();
-
-//const userInfo = new UserInfo();
+/*
+const userInfo = new UserInfo({
+  name: "#profile-title",
+  description: "#profile-job",
+});*/
 
 //Initializing add place popup window
 const addPlacePopup = new PopupWithForm(

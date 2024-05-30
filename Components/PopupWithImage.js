@@ -12,4 +12,8 @@ export default class PopupWithImage extends Popup {
     this._previewImage.setAttribute("alt", data.name);
     super.open();
   }
+
+  close() {
+    super.close();
+  }
 }
