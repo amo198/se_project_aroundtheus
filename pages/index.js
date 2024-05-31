@@ -5,10 +5,8 @@ import PopupWithForm from "../Components/PopupWithForm.js";
 import Section from "../Components/Section.js";
 import UserInfo from "../Components/UserInfo.js";
 import { initialCards, config } from "../utils/Constants.js";
-//import Popup from "../Components/Popup.js";
 
 //Button consts
-//const closeButtons = document.querySelectorAll(".modal__close-button");
 const profileAddButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__edit-button");
 
@@ -63,8 +61,10 @@ profileAddButton.addEventListener("click", () => {
 
 profileEditButton.addEventListener("click", () => {
   profileEditPopup.open();
-  userInfo.getUserInfo();
-  editFormValidator.disableButton();
+  const currentUserInfo = userInfo.getUserInfo();
+  document.querySelector("#profile-name").value = currentUserInfo.name;
+  document.querySelector("#profile-description").value =
+    currentUserInfo.description;
 });
 
 const cardPreview = new PopupWithImage("#image-popup", handleImageClick);
@@ -80,33 +80,39 @@ const addFormValidator = new FormValidator(config, addNewPlaceForm);
 addFormValidator.enableValidation();
 
 //must fix handle add place form create and submit
-function handleAddPlaceFormCreate(evt) {
-  evt.preventDefault();
+function handleAddPlaceFormCreate() {
+  this.setEventListeners();
   evt.target.reset();
   handleAddCardFormSubmit();
-  //closeModal(addPlaceWindow);
+  addPlacePopup.close();
   addFormValidator.disableButton();
 }
 
-function handleAddCardFormSubmit(inputValues) {
-  console.log(inputValues);
-}
-/*
-profileEditButton.addEventListener("click", (name, description) => {
-  userInfo.getUserInfo();
-  profileEditForm.open();
-  editFormValidator.disableButton();
-});*/
+function handleAddCardFormSubmit() {
+  const newCardInfo = {
+    name: this._cardTitle.value,
+    link: this._cardImage.src,
+  };
 
-//must fix, maybe not relevant anymore
-function handleProfileFormSubmit(evt) {
-  //evt.preventDefault();
-  //userInfo.setUserInfo();
-  //closeModal(profileEditWindow);
-  //profileEditPopup.close();
+  const newCard = createCard();
+}
+
+function handleProfileFormSubmit() {
+  profileEditPopup.setEventListeners();
+  editFormValidator.disableButton();
+  userInfo.setUserInfo();
+  profileEditPopup.close();
 }
 
 /* Old Code
+
+
+
+profileEditButton.addEventListener("click", () => {
+  profileEditPopup.open();
+  userInfo.getUserInfo();
+  //editFormValidator.disableButton();
+});
 
 profileEditPopup.addEventListener("submit", handleProfileFormSubmit);
 

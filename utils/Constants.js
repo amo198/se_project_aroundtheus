@@ -42,8 +42,7 @@ const profileDescription = document.querySelector(".profile__description");
 
 const cardTemplate = document.querySelector("#card-template").content;
 
-const profileNameInput = document.querySelector("#profile-name");
-const profileDescriptionInput = document.querySelector("#profile-description");
+
 
 the three const below have been transferred to Popup with image
 const previewImageModal = document.querySelector("#image-popup");
