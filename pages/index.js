@@ -89,12 +89,15 @@ function handleAddPlaceFormCreate() {
 }
 
 function handleAddCardFormSubmit() {
-  const newCardInfo = {
-    name: this._cardTitle.value,
-    link: this._cardImage.src,
-  };
-
-  const newCard = createCard();
+  const cardName = cardNameInput.value;
+  const cardLink = cardLinkInput.value;
+  renderCards({}, ".card__list");
+  cardSection.addItem(cardElement);
+}
+//might not need below create card function
+function createCard(data) {
+  const card = new Card(data, "#card-template", handleImageClick);
+  return card.getCardInfo();
 }
 
 function handleProfileFormSubmit() {
