@@ -5,7 +5,7 @@ import PopupWithForm from "../Components/PopupWithForm.js";
 import Section from "../Components/Section.js";
 import UserInfo from "../Components/UserInfo.js";
 import { initialCards, config } from "../utils/Constants.js";
-import Popup from "../Components/Popup.js";
+//import Popup from "../Components/Popup.js";
 
 //Button consts
 //const closeButtons = document.querySelectorAll(".modal__close-button");
@@ -34,11 +34,11 @@ const cardSection = new Section(
 );
 
 cardSection.renderItems();
-/*
+
 const userInfo = new UserInfo({
   name: "#profile-title",
   description: "#profile-job",
-});*/
+});
 
 //Initializing add place popup window
 const addPlacePopup = new PopupWithForm(
@@ -63,6 +63,8 @@ profileAddButton.addEventListener("click", () => {
 
 profileEditButton.addEventListener("click", () => {
   profileEditPopup.open();
+  userInfo.getUserInfo();
+  editFormValidator.disableButton();
 });
 
 const cardPreview = new PopupWithImage("#image-popup", handleImageClick);
@@ -81,7 +83,7 @@ addFormValidator.enableValidation();
 function handleAddPlaceFormCreate(evt) {
   evt.preventDefault();
   evt.target.reset();
-  //handleAddCardFormSubmit();
+  handleAddCardFormSubmit();
   //closeModal(addPlaceWindow);
   addFormValidator.disableButton();
 }
@@ -91,19 +93,17 @@ function handleAddCardFormSubmit(inputValues) {
 }
 /*
 profileEditButton.addEventListener("click", (name, description) => {
-  //userInfo.getUserInfo();
-  this._profileNameInput.textContent = name;
-  this._profileDescriptionInput.textContent = description;
+  userInfo.getUserInfo();
   profileEditForm.open();
   editFormValidator.disableButton();
 });*/
 
 //must fix, maybe not relevant anymore
 function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
+  //evt.preventDefault();
   //userInfo.setUserInfo();
   //closeModal(profileEditWindow);
-  profileEditPopup.close();
+  //profileEditPopup.close();
 }
 
 /* Old Code
