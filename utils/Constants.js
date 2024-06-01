@@ -33,18 +33,3 @@ export const config = {
   inputErrorClass: "modal__form-input_type",
   errorClass: "modal__error_visible",
 };
-
-//edit profile const
-const profileName = document.querySelector(".profile__title");
-const profileDescription = document.querySelector(".profile__description");
-
-/* Moved constants
-
-const cardTemplate = document.querySelector("#card-template").content;
-
-
-
-the three const below have been transferred to Popup with image
-const previewImageModal = document.querySelector("#image-popup");
-const previewImage = previewImageModal.querySelector(".modal__image-preview");
-const previewImageTitle = document.querySelector(".modal__image-title");*/
