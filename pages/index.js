@@ -88,7 +88,7 @@ function handleAddCardFormSubmit(data) {
 
 function createCard(data) {
   const newCard = new Card(data, "#card-template", handleImageClick);
-  addPlacePopup._getInputValues(newCard);
+  //addPlacePopup._getInputValues(newCard);
   return newCard.getCardInfo(data);
 }
 
