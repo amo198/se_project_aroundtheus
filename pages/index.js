@@ -6,18 +6,6 @@ import Section from "../Components/Section.js";
 import UserInfo from "../Components/UserInfo.js";
 import { initialCards, config } from "../utils/Constants.js";
 
-//Button consts
-const profileAddButton = document.querySelector(".profile__add-button");
-const profileEditButton = document.querySelector(".profile__edit-button");
-
-//Edit profile window consts
-const profileFormElement = document.forms["profile-edit-fields"];
-//const profileEditWindow = document.querySelector("#profile-edit-window");
-
-//New card window consts
-const addNewPlaceForm = document.forms["add-place-edit-fields"];
-//const addPlaceWindow = document.querySelector("#add-place-form");
-
 //Initializing cards
 const cardSection = new Section(
   {
@@ -53,7 +41,29 @@ const profileEditPopup = new PopupWithForm(
 );
 profileEditPopup.setEventListeners();
 
-//buttons
+const cardPreview = new PopupWithImage("#image-popup", handleImageClick);
+
+//Edit profile window consts
+const profileFormElement = document.forms["profile-edit-fields"];
+
+const editFormValidator = new FormValidator(config, profileFormElement);
+editFormValidator.enableValidation();
+
+//New card window consts
+const addNewPlaceForm = document.forms["add-place-edit-fields"];
+
+const addFormValidator = new FormValidator(config, addNewPlaceForm);
+addFormValidator.enableValidation();
+
+function handleImageClick(data) {
+  cardPreview.open(data);
+}
+
+//Button consts
+const profileAddButton = document.querySelector(".profile__add-button");
+const profileEditButton = document.querySelector(".profile__edit-button");
+
+// button event listeners
 
 profileAddButton.addEventListener("click", () => {
   addPlacePopup.open();
@@ -67,42 +77,19 @@ profileEditButton.addEventListener("click", () => {
     currentUserInfo.description;
 });
 
-const cardPreview = new PopupWithImage("#image-popup", handleImageClick);
-
-function handleImageClick(data) {
-  cardPreview.open(data);
-}
-
-const editFormValidator = new FormValidator(config, profileFormElement);
-editFormValidator.enableValidation();
-
-const addFormValidator = new FormValidator(config, addNewPlaceForm);
-addFormValidator.enableValidation();
-
-//must fix handle add place form create and submit
-function handleAddPlaceFormCreate() {
-  this.setEventListeners();
-  evt.target.reset();
-  handleAddCardFormSubmit();
-  addPlacePopup.close();
-  addFormValidator.disableButton();
-}
-
-const cardNameInput = document.querySelector("#place-name");
-const cardLinkInput = document.querySelector("#image-link");
+// form submissions
 
 function handleAddCardFormSubmit(data) {
-  //const cardName = cardNameInput.value;
-  //const cardLink = cardLinkInput.value;
+  this.setEventListeners();
   createCard(data);
   addPlacePopup.close();
-  //renderCards({ name: data.name, link: data.link }, ".cards__list");
-  //cardSection.addItem(cardElement);
+  cardSection.addItem();
 }
-//might not need below create card function
+
 function createCard(data) {
   const newCard = new Card(data, "#card-template", handleImageClick);
-  return newCard.getCardInfo();
+  addPlacePopup._getInputValues(newCard);
+  return newCard.getCardInfo(data);
 }
 
 function handleProfileFormSubmit() {
@@ -114,7 +101,20 @@ function handleProfileFormSubmit() {
 
 /* Old Code
 
+function handleAddPlaceFormCreate() {
+  this.setEventListeners();
+  evt.target.reset();
+  handleAddCardFormSubmit();
+  addPlacePopup.close();
+  addFormValidator.disableButton();
+}
 
+const cardList = document.querySelector(".cards__list");
+
+function renderCard(data, cardList) {
+  const newCardElement = createCard(data);
+  newCardElement.renderItems(cardList);
+}
 
 profileEditButton.addEventListener("click", () => {
   profileEditPopup.open();
