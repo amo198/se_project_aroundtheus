@@ -88,16 +88,21 @@ function handleAddPlaceFormCreate() {
   addFormValidator.disableButton();
 }
 
-function handleAddCardFormSubmit() {
-  const cardName = cardNameInput.value;
-  const cardLink = cardLinkInput.value;
-  renderCards({}, ".card__list");
-  cardSection.addItem(cardElement);
+const cardNameInput = document.querySelector("#place-name");
+const cardLinkInput = document.querySelector("#image-link");
+
+function handleAddCardFormSubmit(data) {
+  //const cardName = cardNameInput.value;
+  //const cardLink = cardLinkInput.value;
+  createCard(data);
+  addPlacePopup.close();
+  //renderCards({ name: data.name, link: data.link }, ".cards__list");
+  //cardSection.addItem(cardElement);
 }
 //might not need below create card function
 function createCard(data) {
-  const card = new Card(data, "#card-template", handleImageClick);
-  return card.getCardInfo();
+  const newCard = new Card(data, "#card-template", handleImageClick);
+  return newCard.getCardInfo();
 }
 
 function handleProfileFormSubmit() {
