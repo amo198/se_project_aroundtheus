@@ -35,6 +35,3 @@ export default class PopupWithFrom extends Popup {
     });
   }
 }
-
-//const placeNameInput = this._popupForm.querySelector("#place-name");
-//const placeImageInput = this._popupForm.querySelector("#image-link");
