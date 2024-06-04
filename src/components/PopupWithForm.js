@@ -5,17 +5,17 @@ export default class PopupWithFrom extends Popup {
     super({ popupSelector });
     this._popupForm = this._popupElement.querySelector(".modal__form");
     this._handleFormSubmit = handleFormSubmit;
+    //this._inputList = this._popupForm.querySelectorAll(".modal__form-input");
   }
 
-  open() {
+  /*  open() {
     super.open();
   }
 
   close() {
-    this._popupForm.reset();
     super.close();
   }
-
+*/
   _getInputValues() {
     const inputList = this._popupForm.querySelectorAll(".modal__form-input");
     const cardData = {};
@@ -32,6 +32,7 @@ export default class PopupWithFrom extends Popup {
     this._popupForm.addEventListener("submit", (evt) => {
       evt.preventDefault();
       this._handleFormSubmit(this._getInputValues());
+      //this._popupForm.reset();
     });
   }
 }

@@ -5,7 +5,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards, config } from "../components/Constants.js";
+import { initialCards, config } from "../utils/Constants.js";
 
 //Initializing cards
 const cardSection = new Section(
@@ -14,6 +14,7 @@ const cardSection = new Section(
     renderer: (data) => {
       const card = new Card(data, "#card-template", handleImageClick);
       const cardElement = card.getCardInfo();
+      //createCard(data);
       cardSection.addItem(cardElement);
     },
   },
@@ -80,15 +81,21 @@ profileEditButton.addEventListener("click", () => {
 
 // form submissions
 
-function handleAddCardFormSubmit(data) {
+function createCard(data) {
   const card = new Card(data, "#card-template", handleImageClick);
-  const cardElement = card.getCardInfo();
+  cardElement = card.getCardInfo();
+  return cardElement;
+}
+
+function handleAddCardFormSubmit(data) {
+  //const card = new Card(data, "#card-template", handleImageClick);
+  //const cardElement = card.getCardInfo();
+  createCard(data);
   cardSection.addItem(cardElement);
   addPlacePopup.close();
 }
 
 function handleProfileFormSubmit() {
-  profileEditPopup.setEventListeners();
   editFormValidator.disableButton();
   userInfo.setUserInfo();
   profileEditPopup.close();
