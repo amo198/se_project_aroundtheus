@@ -21,7 +21,7 @@ export default class PopupWithFrom extends Popup {
     const cardData = {};
     inputList.forEach((input) => {
       cardData[input.name] = input.value;
-      cardData[input.link] = input.link;
+      //cardData[input.link] = input.link;
     });
 
     return cardData;

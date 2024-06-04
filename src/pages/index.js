@@ -24,8 +24,8 @@ const cardSection = new Section(
 cardSection.renderItems();
 
 const userInfo = new UserInfo({
-  name: "#profile-title",
-  description: "#profile-job",
+  nameSelector: "#profile-title",
+  descriptionSelector: "#profile-job",
 });
 
 //Initializing add place popup window
@@ -95,8 +95,15 @@ function handleAddCardFormSubmit(data) {
   addPlacePopup.close();
 }
 
+function handleProfileFormSubmit(formValues) {
+  editFormValidator.disableButton();
+  userInfo.setUserInfo(formValues.name, formValues.description);
+  profileEditPopup.close();
+}
+
+/*
 function handleProfileFormSubmit() {
   editFormValidator.disableButton();
   userInfo.setUserInfo();
   profileEditPopup.close();
-}
+}*/
