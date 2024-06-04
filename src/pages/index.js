@@ -12,9 +12,7 @@ const cardSection = new Section(
   {
     items: initialCards,
     renderer: (data) => {
-      const card = new Card(data, "#card-template", handleImageClick);
-      const cardElement = card.getCardInfo();
-      //createCard(data);
+      const cardElement = createCard(data);
       cardSection.addItem(cardElement);
     },
   },
@@ -83,15 +81,14 @@ profileEditButton.addEventListener("click", () => {
 
 function createCard(data) {
   const card = new Card(data, "#card-template", handleImageClick);
-  cardElement = card.getCardInfo();
+  const cardElement = card.getCardInfo();
   return cardElement;
 }
 
 function handleAddCardFormSubmit(data) {
   //const card = new Card(data, "#card-template", handleImageClick);
-  //const cardElement = card.getCardInfo();
-  createCard(data);
-  cardSection.addItem(cardElement);
+  const newCard = createCard(data);
+  cardSection.addItem(newCard);
   addPlacePopup.close();
 }
 
