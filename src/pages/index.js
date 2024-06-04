@@ -71,6 +71,7 @@ profileAddButton.addEventListener("click", () => {
 
 profileEditButton.addEventListener("click", () => {
   profileEditPopup.open();
+  editFormValidator.disableButton();
   const currentUserInfo = userInfo.getUserInfo();
   document.querySelector("#profile-name").value = currentUserInfo.name;
   document.querySelector("#profile-description").value =
@@ -86,21 +87,15 @@ function createCard(data) {
 }
 
 function handleAddCardFormSubmit(data) {
-  //const card = new Card(data, "#card-template", handleImageClick);
   const newCard = createCard(data);
   cardSection.addItem(newCard);
   addPlacePopup.close();
+  this._popupForm.reset();
+  addFormValidator.disableButton();
 }
 
 function handleProfileFormSubmit(formValues) {
-  editFormValidator.disableButton();
+  //editFormValidator.disableButton();
   userInfo.setUserInfo(formValues.name, formValues.description);
   profileEditPopup.close();
 }
-
-/*
-function handleProfileFormSubmit() {
-  editFormValidator.disableButton();
-  userInfo.setUserInfo();
-  profileEditPopup.close();
-}*/
