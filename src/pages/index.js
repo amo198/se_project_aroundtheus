@@ -95,7 +95,6 @@ function handleAddCardFormSubmit(data) {
 }
 
 function handleProfileFormSubmit(formValues) {
-  //editFormValidator.disableButton();
   userInfo.setUserInfo(formValues.name, formValues.description);
   profileEditPopup.close();
 }
