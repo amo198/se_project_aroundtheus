@@ -90,7 +90,7 @@ function handleAddCardFormSubmit(data) {
   const newCard = createCard(data);
   cardSection.addItem(newCard);
   addPlacePopup.close();
-  this._popupForm.reset();
+  addPlacePopup.resetForm();
   addFormValidator.disableButton();
 }
 

@@ -24,4 +24,8 @@ export default class PopupWithFrom extends Popup {
       this._handleFormSubmit(this._getInputValues());
     });
   }
+
+  resetForm() {
+    this._popupForm.reset();
+  }
 }
