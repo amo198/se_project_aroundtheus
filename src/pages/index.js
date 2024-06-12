@@ -6,8 +6,18 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards, config } from "../utils/Constants.js";
+import Api from "../components/Api.js";
 
 //Initializing cards
+
+// const api = new Api({
+//   baseUrl: "https://around-api.en.tripleten-services.com/v1",
+//   headers: {
+//     authorization: "a5df8bb7-ccf7-4af1-a820-819df810a6c4",
+//     "Content-Type": "application/json",
+//   },
+// });
+
 const cardSection = new Section(
   {
     items: initialCards,
@@ -98,5 +108,14 @@ function handleProfileFormSubmit(formValues) {
   userInfo.setUserInfo(formValues.name, formValues.description);
   profileEditPopup.close();
 }
+/*
+api
+  .getInitialCards()
+  .then((result) => {
+    // process the result
+  })
+  .catch((err) => {
+    console.error(err);
+  });*/
 
 //token: a5df8bb7-ccf7-4af1-a820-819df810a6c4
