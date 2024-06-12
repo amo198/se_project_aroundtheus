@@ -10,26 +10,28 @@ import Api from "../components/Api.js";
 
 //Initializing cards
 
-// const api = new Api({
-//   baseUrl: "https://around-api.en.tripleten-services.com/v1",
-//   headers: {
-//     authorization: "a5df8bb7-ccf7-4af1-a820-819df810a6c4",
-//     "Content-Type": "application/json",
-//   },
-// });
-
-const cardSection = new Section(
-  {
-    items: initialCards,
-    renderer: (data) => {
-      const cardElement = createCard(data);
-      cardSection.addItem(cardElement);
-    },
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "a5df8bb7-ccf7-4af1-a820-819df810a6c4",
+    "Content-Type": "application/json",
   },
-  ".cards__list"
-);
+});
 
-cardSection.renderItems();
+let cardSection;
+
+api.getInitialCards().then((cards) => {
+  cardSection = new Section(
+    {
+      items: cards,
+      renderer: (data) => {
+        createCard(data);
+      },
+    },
+    ".cards__list"
+  );
+  cardSection.renderItems();
+});
 
 const userInfo = new UserInfo({
   nameSelector: "#profile-title",
