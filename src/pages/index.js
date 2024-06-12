@@ -25,13 +25,25 @@ api.getInitialCards().then((cards) => {
     {
       items: cards,
       renderer: (data) => {
-        createCard(data);
+        const cardElement = createCard(data);
+        cardSection.addItem(cardElement);
       },
     },
     ".cards__list"
   );
   cardSection.renderItems();
 });
+
+// const cardSection = new Section(
+//   {
+//     items: initialCards,
+//     renderer: (data) => {
+//       const cardElement = createCard(data);
+//       cardSection.addItem(cardElement);
+//     },
+//   },
+//   ".cards__list"
+// );
 
 const userInfo = new UserInfo({
   nameSelector: "#profile-title",
