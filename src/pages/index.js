@@ -20,19 +20,31 @@ const api = new Api({
 
 let cardSection;
 
-api.getInitialCards().then((cards) => {
-  cardSection = new Section(
-    {
-      items: cards,
-      renderer: (data) => {
-        const cardElement = createCard(data);
-        cardSection.addItem(cardElement);
+api
+  .getInitialCards()
+  .then((cards) => {
+    cardSection = new Section(
+      {
+        items: cards,
+        renderer: (data) => {
+          const cardElement = createCard(data);
+          cardSection.addItem(cardElement);
+        },
       },
-    },
-    ".cards__list"
-  );
-  cardSection.renderItems();
-});
+      ".cards__list"
+    );
+    cardSection.renderItems();
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+// api.updateUserInfo().then((userData) => {
+//   userInfo.setUserInfo({
+//     name: userData.name,
+//     about: userData.description,
+//   });
+// });
 
 const userInfo = new UserInfo({
   nameSelector: "#profile-title",

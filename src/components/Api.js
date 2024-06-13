@@ -16,14 +16,53 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
+
+  addCard() {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers,
+      method: "POST",
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  // Profile Requests
+
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: this._headers,
+      method: "GET",
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return Promise.reject(`Error: ${res.status}`);
+      })
+      .then((userInfo) => {
+        // Process userInfo
+      });
+  }
+
+  // updateUserInfo({ name, description }) {
+  //   fetch(`${this._baseUrl}/users/me`, {
+  //     method: "PATCH",
+  //     headers: this._headers,
+  //     body: JSON.stringify({
+  //       name,
+  //       description,
+  //     }),
+  //   }).then((res) => {
+  //     if (res.ok) {
+  //       return res.json();
+  //     }
+
+  //     return Promise.reject(`Error: ${res.status}`);
+  //   });
+  // }
 }
-
-// other methods for working with the API
-
-// const api = new Api({
-//   baseUrl: "https://around-api.en.tripleten-services.com/v1",
-//   headers: {
-//     authorization: "a5df8bb7-ccf7-4af1-a820-819df810a6c4",
-//     "Content-Type": "application/json",
-//   },
-// });
