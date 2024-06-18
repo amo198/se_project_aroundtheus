@@ -39,6 +39,11 @@ api
     console.error(err);
   });
 
+// api.addCard().then((data) => {
+//   createCard(data);
+//   // addForm.reset();
+// });
+
 // api.updateUserInfo().then((userData) => {
 //   userInfo.setUserInfo({
 //     name: userData.name,
@@ -84,6 +89,10 @@ function handleImageClick(data) {
   cardPreview.open(data);
 }
 
+function handleDelete(data) {
+  api.deleteCard(data).then(() => {});
+}
+
 //Button consts
 const profileAddButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__edit-button");
@@ -112,7 +121,11 @@ function createCard(data) {
 }
 
 function handleAddCardFormSubmit(data) {
-  const newCard = createCard(data);
+  // const newCard = createCard(data);
+  // cardSection.addItem(newCard);
+  const newCard = api.addCard(data).then((data) => {
+    createCard(data);
+  });
   cardSection.addItem(newCard);
   addPlacePopup.close();
   addPlacePopup.resetForm();

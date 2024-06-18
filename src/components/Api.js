@@ -17,10 +17,27 @@ export default class Api {
     });
   }
 
-  addCard() {
+  addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
       method: "POST",
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  deleteCard() {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers,
+      method: "DELETE",
     }).then((res) => {
       if (res.ok) {
         return res.json();
