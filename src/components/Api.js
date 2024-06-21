@@ -53,33 +53,46 @@ export default class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "GET",
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return Promise.reject(`Error: ${res.status}`);
-      })
-      .then((userInfo) => {
-        // Process userInfo
-      });
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return res
+        .json()
+        .then((err) =>
+          Promise.reject(`Error: ${res.status} - ${JSON.stringify(err)}`)
+        );
+    });
   }
-
-  // updateUserInfo({ name, description }) {
-  //   fetch(`${this._baseUrl}/users/me`, {
-  //     method: "PATCH",
+  // getUserInfo() {
+  //   return fetch(`${this._baseUrl}/users/me`, {
   //     headers: this._headers,
-  //     body: JSON.stringify({
-  //       name,
-  //       description,
-  //     }),
-  //   }).then((res) => {
-  //     if (res.ok) {
-  //       return res.json();
-  //     }
+  //     method: "GET",
+  //   })
+  //     .then((res) => {
+  //       if (res.ok) {
+  //         return res.json();
+  //       }
 
-  //     return Promise.reject(`Error: ${res.status}`);
-  //   });
+  //       return Promise.reject(`Error: ${res.status}`);
+  //     })
+  //     .then((userInfo) => {});
   // }
+
+  updateUserInfo(name, about) {
+    fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name,
+        about,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
 }

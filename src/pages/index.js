@@ -39,23 +39,6 @@ api
     console.error(err);
   });
 
-// api.addCard().then((data) => {
-//   createCard(data);
-//   // addForm.reset();
-// });
-
-// api.updateUserInfo().then((userData) => {
-//   userInfo.setUserInfo({
-//     name: userData.name,
-//     about: userData.description,
-//   });
-// });
-
-const userInfo = new UserInfo({
-  nameSelector: "#profile-title",
-  descriptionSelector: "#profile-job",
-});
-
 //Initializing add place popup window
 const addPlacePopup = new PopupWithForm(
   "#add-place-form",
@@ -103,13 +86,27 @@ profileAddButton.addEventListener("click", () => {
   addPlacePopup.open();
 });
 
+const userInfo = new UserInfo({
+  nameSelector: "#profile-title",
+  descriptionSelector: "#profile-job",
+  // avatarImage: "#profile-image",
+});
+
+api.getUserInfo().then((userData) => {
+  userInfo.setUserInfo(userData.name, userData.about);
+});
+
 profileEditButton.addEventListener("click", () => {
   profileEditPopup.open();
   editFormValidator.disableButton();
-  const currentUserInfo = userInfo.getUserInfo();
-  document.querySelector("#profile-name").value = currentUserInfo.name;
-  document.querySelector("#profile-description").value =
-    currentUserInfo.description;
+  api.setUserInfo().then((userData) => {
+    document.querySelector("#profile-name").value = userData.name;
+    document.querySelector("#profile-description").value = userData.about;
+  });
+  // const currentUserInfo = userInfo.getUserInfo();
+  // document.querySelector("#profile-name").value = currentUserInfo.name;
+  // document.querySelector("#profile-description").value =
+  //   currentUserInfo.description;
 });
 
 // form submissions
@@ -134,6 +131,9 @@ function handleAddCardFormSubmit(data) {
 
 function handleProfileFormSubmit(formValues) {
   userInfo.setUserInfo(formValues.name, formValues.description);
+  // api.updateUserInfo().then((formValues) => {
+  //   userInfo.setUserInfo(formValues);
+  // });
   profileEditPopup.close();
 }
 /*
