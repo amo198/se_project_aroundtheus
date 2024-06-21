@@ -79,13 +79,14 @@ export default class Api {
   //     .then((userInfo) => {});
   // }
 
-  updateUserInfo(name, about) {
+  updateUserInfo(name, about, avatarImage) {
     fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name,
         about,
+        avatarImage,
       }),
     }).then((res) => {
       if (res.ok) {

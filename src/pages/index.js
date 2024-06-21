@@ -89,20 +89,20 @@ profileAddButton.addEventListener("click", () => {
 const userInfo = new UserInfo({
   nameSelector: "#profile-title",
   descriptionSelector: "#profile-job",
-  // avatarImage: "#profile-image",
+  avatarImage: "#profile-image",
 });
 
 api.getUserInfo().then((userData) => {
-  userInfo.setUserInfo(userData.name, userData.about);
+  userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
 });
 
 profileEditButton.addEventListener("click", () => {
   profileEditPopup.open();
   editFormValidator.disableButton();
-  api.setUserInfo().then((userData) => {
-    document.querySelector("#profile-name").value = userData.name;
-    document.querySelector("#profile-description").value = userData.about;
-  });
+  // api.setUserInfo().then((userData) => {
+  //   document.querySelector("#profile-name").value = userData.name;
+  //   document.querySelector("#profile-description").value = userData.about;
+  // });
   // const currentUserInfo = userInfo.getUserInfo();
   // document.querySelector("#profile-name").value = currentUserInfo.name;
   // document.querySelector("#profile-description").value =
