@@ -7,6 +7,7 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import { initialCards, config } from "../utils/Constants.js";
 import Api from "../components/Api.js";
+import DeletePopup from "../components/DeletePopup.js";
 
 //Initializing cards
 
@@ -72,13 +73,10 @@ function handleImageClick(data) {
   cardPreview.open(data);
 }
 
-function handleDelete(data) {
-  api.deleteCard(data).then(() => {});
-}
-
 //Button consts
 const profileAddButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__edit-button");
+// const deleteButton = document.querySelector(".modal__delete-button");
 
 // button event listeners
 
@@ -96,17 +94,31 @@ api.getUserInfo().then((userData) => {
   userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
 });
 
+const deletePopup = new DeletePopup("#delete-card");
+
+// deleteButton.addEventListener("click", () => {
+//   console.log("open!");
+// });
+
+function handleDelete(cardId, cardElement) {
+  console.log("open!");
+  deletePopup.open();
+  // api.deleteCard().then(() => {
+  // });
+}
+
 profileEditButton.addEventListener("click", () => {
   profileEditPopup.open();
   editFormValidator.disableButton();
-  // api.setUserInfo().then((userData) => {
+  // api.updateUserInfo().then((userData) => {
+  //   const currentUserInfo = userInfo.getUserInfo();
   //   document.querySelector("#profile-name").value = userData.name;
-  //   document.querySelector("#profile-description").value = userData.about;
+  //   document.querySelector("#profile-description").value = userData.description;
   // });
-  // const currentUserInfo = userInfo.getUserInfo();
-  // document.querySelector("#profile-name").value = currentUserInfo.name;
-  // document.querySelector("#profile-description").value =
-  //   currentUserInfo.description;
+  const currentUserInfo = userInfo.getUserInfo();
+  document.querySelector("#profile-name").value = currentUserInfo.name;
+  document.querySelector("#profile-description").value =
+    currentUserInfo.description;
 });
 
 // form submissions
@@ -129,21 +141,23 @@ function handleAddCardFormSubmit(data) {
   addFormValidator.disableButton();
 }
 
-function handleProfileFormSubmit(formValues) {
-  userInfo.setUserInfo(formValues.name, formValues.description);
-  // api.updateUserInfo().then((formValues) => {
-  //   userInfo.setUserInfo(formValues);
-  // });
-  profileEditPopup.close();
-}
-/*
-api
-  .getInitialCards()
-  .then((result) => {
-    // process the result
-  })
-  .catch((err) => {
-    console.error(err);
-  });*/
+function handleProfileFormSubmit(userData) {
+  // userInfo.setUserInfo(formValues.name, formValues.description);
+  api
+    .updateUserInfo({ name: userData.name, description: userData.about })
+    .then(({ name, about }) => {
+      userInfo.setUserInfo({ name, about });
+      profileEditPopup.close();
+    });
 
-//token: a5df8bb7-ccf7-4af1-a820-819df810a6c4
+  // api.editProfile({
+  //   name: inputValues.name,
+  //   about: inputValues.about
+  // })
+  // .then(({ name, about }) => {
+  //   userInfo.setUserInfo({
+  //     name: name,
+  //     about: about,
+  //   });
+  // })
+}

@@ -4,6 +4,7 @@ export default class Api {
     this._headers = headers;
   }
 
+  // _results() {}
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
@@ -34,18 +35,18 @@ export default class Api {
     });
   }
 
-  deleteCard() {
-    return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
-      method: "DELETE",
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
+  // deleteCard(cardId, cardElement) {
+  //   return fetch(`${this._baseUrl}/cards/cardId`, {
+  //     headers: this._headers,
+  //     method: "DELETE",
+  //   }).then((res) => {
+  //     if (res.ok) {
+  //       return res.json();
+  //     }
 
-      return Promise.reject(`Error: ${res.status}`);
-    });
-  }
+  //     return Promise.reject(`Error: ${res.status}`);
+  //   });
+  // }
 
   // Profile Requests
 
@@ -64,36 +65,25 @@ export default class Api {
         );
     });
   }
-  // getUserInfo() {
-  //   return fetch(`${this._baseUrl}/users/me`, {
-  //     headers: this._headers,
-  //     method: "GET",
-  //   })
-  //     .then((res) => {
-  //       if (res.ok) {
-  //         return res.json();
-  //       }
 
-  //       return Promise.reject(`Error: ${res.status}`);
-  //     })
-  //     .then((userInfo) => {});
-  // }
-
-  updateUserInfo(name, about, avatarImage) {
+  updateUserInfo({ name, about }) {
     fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
         name,
         about,
-        avatarImage,
       }),
     }).then((res) => {
       if (res.ok) {
         return res.json();
       }
 
-      return Promise.reject(`Error: ${res.status}`);
+      return res
+        .json()
+        .then((err) =>
+          Promise.reject(`Error: ${res.status} - ${JSON.stringify(err)}`)
+        );
     });
   }
 }
