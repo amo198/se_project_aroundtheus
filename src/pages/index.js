@@ -149,10 +149,14 @@ function createCard(data) {
 function handleAddCardFormSubmit(data) {
   // const newCard = createCard(data);
   // cardSection.addItem(newCard);
-  const newCard = api.addCard(data).then((data) => {
-    createCard(data);
+  // const newCard = api.addCard(data).then((data) => {
+  //   createCard(data);
+  // });
+  // cardSection.addItem(newCard);
+  api.addCard(data).then((data) => {
+    const newCardElement = createCard(data);
+    cardSection.addItem(newCardElement);
   });
-  cardSection.addItem(newCard);
   addPlacePopup.close();
   addPlacePopup.resetForm();
   addFormValidator.disableButton();

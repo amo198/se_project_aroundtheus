@@ -4,7 +4,10 @@ export default class Api {
     this._headers = headers;
   }
 
-  // _results() {}
+  // _results() {
+
+  // }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
