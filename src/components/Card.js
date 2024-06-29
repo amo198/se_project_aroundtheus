@@ -32,7 +32,7 @@ export default class Card {
     this._likeButton.classList.toggle("card__like-button_active");
   };
 
-  handleDelete() {
+  handleDeleteCard() {
     this._cardElement.remove();
     this._cardElement = null;
   }

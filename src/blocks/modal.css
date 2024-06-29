@@ -86,7 +86,13 @@
 }
 
 .modal__submit-button {
-  background: transparent url(../images/Submit\ Button.svg) center no-repeat;
+  /* background: transparent url(../images/Submit\ Button.svg) center no-repeat; */
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  color: #fff;
+  background-color: black;
   border-style: none;
   border-radius: 2px;
   padding: 0;
@@ -100,7 +106,7 @@
 }
 
 .modal__submit-button_disabled:hover {
-  opacity: 1;
+  opacity: 0.2;
   cursor: default;
 }
 
@@ -129,7 +135,7 @@
 }
 
 .modal__submit-button_disabled {
-  background: transparent url(../images/disable\ button.svg) center no-repeat;
+  opacity: 0.2;
 }
 
 .modal_image-popup {
@@ -174,28 +180,6 @@
 
 .modal__title_delete {
   margin-bottom: 38px;
-}
-
-/* .modal_delete-popup {
-  position: fixed;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 15;
-} */
-
-.modal__delete-button {
-  background: transparent url(../images/Yes\ Button.svg) center no-repeat;
-  border-style: none;
-  border-radius: 2px;
-  padding: 0;
-  height: 50px;
-  width: 358px;
 }
 
 @media screen and (max-width: 480px) {

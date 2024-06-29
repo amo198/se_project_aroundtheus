@@ -111,7 +111,7 @@ function handleDeleteCard(card) {
     .deleteCard(card.getCardId())
     .then(() => {
       // console.log("This post has been deleted");
-      card.handleDelete();
+      card.handleDeleteCard();
       deletePopup.close();
     })
     .catch((err) => {
