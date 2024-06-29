@@ -76,7 +76,6 @@ function handleImageClick(data) {
 //Button consts
 const profileAddButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__edit-button");
-// const deleteButton = document.querySelector(".modal__delete-button");
 
 // button event listeners
 
@@ -94,17 +93,30 @@ api.getUserInfo().then((userData) => {
   userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
 });
 
-const deletePopup = new DeletePopup("#delete-card");
+const deleteCardForm = document.forms["delete-card-form"];
 
-// deleteButton.addEventListener("click", () => {
-//   console.log("open!");
-// });
+const deletePopup = new DeletePopup("#delete-card", deleteCardForm);
+deletePopup.setEventListeners();
 
-function handleDelete(cardId, cardElement) {
-  console.log("open!");
+// runs when we click the trach button on a card
+function handleDeleteModal(card) {
+  deletePopup.setSubmitHandler(() => handleDeleteCard(card));
   deletePopup.open();
-  // api.deleteCard().then(() => {
-  // });
+}
+
+//runs when we click 'yes' on the deletePopup modal
+function handleDeleteCard(card) {
+  //console.log(cardId);
+  api
+    .deleteCard(card.getCardId())
+    .then(() => {
+      // console.log("This post has been deleted");
+      card.handleDelete();
+      deletePopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -124,7 +136,12 @@ profileEditButton.addEventListener("click", () => {
 // form submissions
 
 function createCard(data) {
-  const card = new Card(data, "#card-template", handleImageClick);
+  const card = new Card(
+    data,
+    "#card-template",
+    handleImageClick,
+    handleDeleteModal
+  );
   const cardElement = card.getCardInfo();
   return cardElement;
 }
