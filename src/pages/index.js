@@ -106,17 +106,39 @@ function handleDeleteModal(card) {
 
 //runs when we click 'yes' on the deletePopup modal
 function handleDeleteCard(card) {
-  //console.log(cardId);
   api
     .deleteCard(card.getCardId())
     .then(() => {
-      // console.log("This post has been deleted");
       card.handleDeleteCard();
       deletePopup.close();
     })
     .catch((err) => {
       console.log(err);
     });
+}
+
+function handleLikeCard(card) {
+  if (card.isLiked) {
+    api
+      .unlikeCard(card._id)
+      .then((res) => {
+        // card.handleLikeCard();
+        card.handleLikeCard();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    api
+      .likeCard(card._id)
+      .then((res) => {
+        // card.handleLikeCard();
+        card.handleLikeCard();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -140,19 +162,14 @@ function createCard(data) {
     data,
     "#card-template",
     handleImageClick,
-    handleDeleteModal
+    handleDeleteModal,
+    handleLikeCard
   );
   const cardElement = card.getCardInfo();
   return cardElement;
 }
 
 function handleAddCardFormSubmit(data) {
-  // const newCard = createCard(data);
-  // cardSection.addItem(newCard);
-  // const newCard = api.addCard(data).then((data) => {
-  //   createCard(data);
-  // });
-  // cardSection.addItem(newCard);
   api.addCard(data).then((data) => {
     const newCardElement = createCard(data);
     cardSection.addItem(newCardElement);
