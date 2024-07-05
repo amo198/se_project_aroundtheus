@@ -4,6 +4,9 @@ export default class Popup {
     this._closeButton = this._popupElement.querySelector(
       ".modal__close-button"
     );
+    this._buttonElement = this._popupElement.querySelector(
+      ".modal__submit-button"
+    );
   }
 
   open() {
@@ -34,5 +37,13 @@ export default class Popup {
     });
 
     this._popupElement.addEventListener("mousedown", this._handleClickOutside);
+  }
+
+  renderloading(isLoading) {
+    if (isLoading) {
+      this._buttonElement.textContent = "Saving...";
+    } else {
+      this._buttonElement.textContent = "Save";
+    }
   }
 }
