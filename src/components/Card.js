@@ -33,10 +33,6 @@ export default class Card {
     });
   }
 
-  // _handleLikeCard = () => {
-  //   this._likeButton.classList.toggle("card__like-button_active");
-  // };
-
   handleLikeCard(isLiked) {
     this.isLiked = isLiked;
     this.renderCardLike();
@@ -50,14 +46,9 @@ export default class Card {
     }
   }
 
-  // renderCardLike(isLiked) {
-  //   this.isLiked = isLiked;
-  //   this._handleLikeCard();
-  // }
-
-  // isLiked() {
-  //   return this.isLiked;
-  // }
+  isLiked() {
+    return this.isLiked;
+  }
 
   handleDeleteCard() {
     this._cardElement.remove();

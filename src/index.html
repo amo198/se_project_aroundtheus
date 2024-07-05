@@ -16,12 +16,15 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            class="profile__image"
-            id="profile-image"
-            src="<%= require('./images/jacques-cousteau.svg')%>"
-            alt="Avatar Image"
-          />
+          <div class="profile__avatar-container">
+            <img
+              class="profile__image"
+              id="profile-image"
+              src="<%= require('./images/jacques-cousteau.svg')%>"
+              alt="Avatar Image"
+            />
+            <button type="button" class="profile__avatar-button"></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title" id="profile-title">Jacques Cousteau</h1>
             <p class="profile__description" id="profile-job">Explorer</p>
@@ -148,6 +151,32 @@
             id="delete-card-close"
           ></button>
           <button class="modal__submit-button">Yes</button>
+        </form>
+      </div>
+    </div>
+    <div class="modal" id="edit-avatar">
+      <div class="modal__container">
+        <form class="modal__form" id="edit-avatar-image">
+          <h2 class="modal__title">Change profile picture</h2>
+          <input
+            class="modal__form-input"
+            type="url"
+            id="avatar-link"
+            name="link"
+            required
+          />
+          <span class="modal__error" id="avatar-link-error"></span>
+          <button
+            type="button"
+            class="modal__close-button"
+            id="avatar-modal-close"
+          ></button>
+          <button
+            class="modal__submit-button modal__submit-button_disabled"
+            disabled
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>

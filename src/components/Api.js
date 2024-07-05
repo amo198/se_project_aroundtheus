@@ -94,8 +94,8 @@ export default class Api {
     });
   }
 
-  updateUserInfo({ name, about }) {
-    fetch(`${this._baseUrl}/users/me`, {
+  updateUserInfo(name, about) {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -107,11 +107,23 @@ export default class Api {
         return res.json();
       }
 
-      return res
-        .json()
-        .then((err) =>
-          Promise.reject(`Error: ${res.status} - ${JSON.stringify(err)}`)
-        );
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
+  updateAvatarImage({ link }) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
 }

@@ -48,7 +48,7 @@ const addPlacePopup = new PopupWithForm(
 
 addPlacePopup.setEventListeners();
 
-//Initializing add place popup window
+//Initializing profile popup window
 const profileEditPopup = new PopupWithForm(
   "#profile-edit-window",
   handleProfileFormSubmit
@@ -76,11 +76,27 @@ function handleImageClick(data) {
 //Button consts
 const profileAddButton = document.querySelector(".profile__add-button");
 const profileEditButton = document.querySelector(".profile__edit-button");
-
+const editAvatarButton = document.querySelector(".profile__avatar-container");
 // button event listeners
 
 profileAddButton.addEventListener("click", () => {
   addPlacePopup.open();
+});
+
+const editAvatarForm = document.forms["edit-avatar-image"];
+
+const editAvatarPopup = new PopupWithForm(
+  "#edit-avatar",
+  handleAvatarFormSubmit
+);
+editAvatarPopup.setEventListeners();
+
+const avatarFormValidator = new FormValidator(config, editAvatarForm);
+avatarFormValidator.enableValidation();
+
+editAvatarButton.addEventListener("click", () => {
+  editAvatarPopup.open();
+  avatarFormValidator.disableButton();
 });
 
 const userInfo = new UserInfo({
@@ -90,7 +106,8 @@ const userInfo = new UserInfo({
 });
 
 api.getUserInfo().then((userData) => {
-  userInfo.setUserInfo(userData.name, userData.about, userData.avatar);
+  userInfo.setUserInfo(userData.name, userData.about);
+  userInfo.setUserAvatar(userData.avatar);
 });
 
 const deleteCardForm = document.forms["delete-card-form"];
@@ -120,20 +137,18 @@ function handleDeleteCard(card) {
 function handleLikeCard(card) {
   if (card.isLiked) {
     api
-      .unlikeCard(card._id)
+      .unlikeCard(card.getCardId())
       .then((res) => {
-        // card.handleLikeCard();
-        card.handleLikeCard();
+        card.handleLikeCard(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
       });
   } else {
     api
-      .likeCard(card._id)
+      .likeCard(card.getCardId())
       .then((res) => {
-        // card.handleLikeCard();
-        card.handleLikeCard();
+        card.handleLikeCard(res.isLiked);
       })
       .catch((err) => {
         console.error(err);
@@ -144,15 +159,10 @@ function handleLikeCard(card) {
 profileEditButton.addEventListener("click", () => {
   profileEditPopup.open();
   editFormValidator.disableButton();
-  // api.updateUserInfo().then((userData) => {
-  //   const currentUserInfo = userInfo.getUserInfo();
-  //   document.querySelector("#profile-name").value = userData.name;
-  //   document.querySelector("#profile-description").value = userData.description;
-  // });
-  const currentUserInfo = userInfo.getUserInfo();
-  document.querySelector("#profile-name").value = currentUserInfo.name;
-  document.querySelector("#profile-description").value =
-    currentUserInfo.description;
+  api.getUserInfo().then((res) => {
+    document.querySelector("#profile-name").value = res.name;
+    document.querySelector("#profile-description").value = res.about;
+  });
 });
 
 // form submissions
@@ -180,22 +190,21 @@ function handleAddCardFormSubmit(data) {
 }
 
 function handleProfileFormSubmit(userData) {
-  // userInfo.setUserInfo(formValues.name, formValues.description);
-  api
-    .updateUserInfo({ name: userData.name, description: userData.about })
-    .then(({ name, about }) => {
-      userInfo.setUserInfo({ name, about });
-      profileEditPopup.close();
-    });
-
-  // api.editProfile({
-  //   name: inputValues.name,
-  //   about: inputValues.about
-  // })
-  // .then(({ name, about }) => {
-  //   userInfo.setUserInfo({
-  //     name: name,
-  //     about: about,
-  //   });
-  // })
+  api.updateUserInfo(userData.name, userData.about).then((res) => {
+    userInfo.setUserInfo(res.name, res.about);
+    profileEditPopup.close();
+  });
 }
+
+function handleAvatarFormSubmit(userData) {
+  api
+    .updateAvatarImage(userData)
+    .then((res) => {
+      userInfo.setUserAvatar(res.avatar);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  editAvatarPopup.close();
+}
+// userInfo.setUserAvatar(res.avatar);
