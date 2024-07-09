@@ -18,8 +18,4 @@ export default class DeletePopup extends Popup {
       this._handleDeleteCard();
     });
   }
-
-  handleDelete() {
-    this._handleDeleteCard;
-  }
 }

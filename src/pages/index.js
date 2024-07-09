@@ -64,10 +64,15 @@ const userInfo = new UserInfo({
   avatarImage: "#profile-image",
 });
 
-api.getUserInfo().then((userData) => {
-  userInfo.setUserInfo(userData.name, userData.about);
-  userInfo.setUserAvatar(userData.avatar);
-});
+api
+  .getUserInfo()
+  .then((userData) => {
+    userInfo.setUserInfo(userData.name, userData.about);
+    userInfo.setUserAvatar(userData.avatar);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
 
 //Initializing popup windows
 const addPlacePopup = new PopupWithForm(
@@ -120,16 +125,14 @@ profileAddButton.addEventListener("click", () => {
 
 editAvatarButton.addEventListener("click", () => {
   editAvatarPopup.open();
-  avatarFormValidator.disableButton();
 });
 
 profileEditButton.addEventListener("click", () => {
   profileEditPopup.open();
-  editFormValidator.disableButton();
-  api.getUserInfo().then((res) => {
-    document.querySelector("#profile-name").value = res.name;
-    document.querySelector("#profile-description").value = res.about;
-  });
+  const currentUserInfo = userInfo.getUserInfo();
+  document.querySelector("#profile-name").value = currentUserInfo.name;
+  document.querySelector("#profile-description").value =
+    currentUserInfo.description;
 });
 
 //feature functions
@@ -194,16 +197,16 @@ function handleAddCardFormSubmit(data) {
     .then((data) => {
       const newCardElement = createCard(data);
       cardSection.addItem(newCardElement);
+      addPlacePopup.resetForm();
+      addFormValidator.disableButton();
+      addPlacePopup.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      addFormValidator.disableButton();
       addPlacePopup.renderloading(false);
-      addPlacePopup.close();
     });
-  addPlacePopup.resetForm();
 }
 
 function handleProfileFormSubmit(userData) {
@@ -212,13 +215,14 @@ function handleProfileFormSubmit(userData) {
     .updateUserInfo(userData.name, userData.about)
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about);
+      editFormValidator.disableButton();
+      profileEditPopup.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       profileEditPopup.renderloading(false);
-      profileEditPopup.close();
     });
 }
 
@@ -228,12 +232,13 @@ function handleAvatarFormSubmit(userData) {
     .updateAvatarImage(userData)
     .then((res) => {
       userInfo.setUserAvatar(res.avatar);
+      avatarFormValidator.disableButton();
+      editAvatarPopup.close();
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       editAvatarPopup.renderloading(false);
-      editAvatarPopup.close();
     });
 }
