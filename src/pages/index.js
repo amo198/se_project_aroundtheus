@@ -30,12 +30,6 @@ const api = new Api({
   },
 });
 
-Promise.all([api.getInitialCards(), api.getUserInfo()])
-  .then(([cards, userInfo]) => {
-    console.log(cards, userInfo);
-  })
-  .catch((err) => console.error(err));
-
 let cardSection;
 
 api
