@@ -16,11 +16,15 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            class="profile__image"
-            src="<%= require('./images/jacques-cousteau.svg')%>"
-            alt="Avatar Image"
-          />
+          <div class="profile__avatar-container">
+            <img
+              class="profile__image"
+              id="profile-image"
+              src="<%= require('./images/jacques-cousteau.svg')%>"
+              alt="Avatar Image"
+            />
+            <button type="button" class="profile__avatar-button"></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title" id="profile-title">Jacques Cousteau</h1>
             <p class="profile__description" id="profile-job">Explorer</p>
@@ -49,7 +53,7 @@
     </div>
     <div class="modal" id="profile-edit-window">
       <div class="modal__container">
-        <form class="modal__form" id="profile-edit-fields">
+        <form class="modal__form" id="profile-edit-fields" name="profile-form">
           <h2 class="modal__title">Edit profile</h2>
           <button
             type="button"
@@ -72,7 +76,7 @@
               class="modal__form-input"
               type="text"
               id="profile-description"
-              name="description"
+              name="about"
               placeholder="About me"
               minlength="2"
               maxlength="200"
@@ -80,15 +84,19 @@
             />
             <span class="modal__error" id="profile-description-error"></span>
           </fieldset>
-          <button
-            class="modal__submit-button modal__submit-button_disabled"
-          ></button>
+          <button class="modal__submit-button modal__submit-button_disabled">
+            Save
+          </button>
         </form>
       </div>
     </div>
     <div class="modal" id="add-place-form">
       <div class="modal__container">
-        <form class="modal__form" id="add-place-edit-fields">
+        <form
+          class="modal__form"
+          id="add-place-edit-fields"
+          name="add-card-form"
+        >
           <h2 class="modal__title">New Place</h2>
           <button
             type="button"
@@ -120,7 +128,9 @@
           <button
             class="modal__submit-button modal__submit-button_disabled"
             disabled
-          ></button>
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>
@@ -133,6 +143,49 @@
           class="modal__close-button"
           id="image-preview-close"
         ></button>
+      </div>
+    </div>
+    <div class="modal" id="delete-card">
+      <div class="modal__container">
+        <form class="modal__form" id="delete-card-form" name="delete-card-form">
+          <h2 class="modal__title modal__title_delete">Are you sure?</h2>
+          <button
+            type="button"
+            class="modal__close-button"
+            id="delete-card-close"
+          ></button>
+          <button class="modal__submit-button">Yes</button>
+        </form>
+      </div>
+    </div>
+    <div class="modal" id="edit-avatar">
+      <div class="modal__container">
+        <form
+          class="modal__form"
+          id="edit-avatar-image"
+          name="edit-avatar-form"
+        >
+          <h2 class="modal__title">Change profile picture</h2>
+          <input
+            class="modal__form-input"
+            type="url"
+            id="avatar-link"
+            name="link"
+            required
+          />
+          <span class="modal__error" id="avatar-link-error"></span>
+          <button
+            type="button"
+            class="modal__close-button"
+            id="avatar-modal-close"
+          ></button>
+          <button
+            class="modal__submit-button modal__submit-button_disabled"
+            disabled
+          >
+            Save
+          </button>
+        </form>
       </div>
     </div>
   </body>

@@ -7,6 +7,7 @@ export default class PopupWithImage extends Popup {
     this._previewImageTitle = document.querySelector(".modal__image-title");
     this.setEventListeners();
   }
+
   open(data) {
     this._previewImageTitle.textContent = data.name;
     this._previewImage.setAttribute("src", data.link);
